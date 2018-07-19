@@ -28,7 +28,13 @@
     self.lbTime.text = [NSString stringWithFormat:@"%d/%d",(int)[self.audioPlayer currentTime],(int)[self.audioPlayer duration]];
     self.audioPlayer.delegate = self;
     [AudioManager setSessionCategoryForMultiRouteWithError:nil];
+    //[self getFiles:[[NSBundle mainBundle]resourcePath]];
     // Do any additional setup after loading the view.
+}
+- (IBAction)bFileManagerAction:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    VCAudioRecorder *fileManagerView = [storyboard instantiateViewControllerWithIdentifier:@"FileManager"];
+    [self.navigationController pushViewController:fileManagerView animated:YES];
 }
 - (void) goToRecord {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

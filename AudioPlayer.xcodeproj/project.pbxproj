@@ -16,6 +16,8 @@
 		860D6BD0210080AA00D05F7F /* AudioPlayerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D6BCF210080AA00D05F7F /* AudioPlayerUITests.m */; };
 		860D6BDF210080DA00D05F7F /* VCAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D6BDE210080DA00D05F7F /* VCAudioPlayer.m */; };
 		860D6BE12100832E00D05F7F /* firstAudio.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 860D6BE02100832E00D05F7F /* firstAudio.mp3 */; };
+		863880462100DA9B009F8A66 /* VCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 863880452100DA9B009F8A66 /* VCFileManager.m */; };
+		8638804A2100DB17009F8A66 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 863880492100DB17009F8A66 /* FileManager.m */; };
 		8698297E2100A08900934B9F /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8698297D2100A08900934B9F /* AudioManager.m */; };
 		869829872100B74A00934B9F /* VCAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 869829862100B74A00934B9F /* VCAudioRecorder.m */; };
 		8698298C2100CBF900934B9F /* ErrorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8698298B2100CBF900934B9F /* ErrorManager.m */; };
@@ -56,6 +58,10 @@
 		860D6BDD210080DA00D05F7F /* VCAudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCAudioPlayer.h; sourceTree = "<group>"; };
 		860D6BDE210080DA00D05F7F /* VCAudioPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCAudioPlayer.m; sourceTree = "<group>"; };
 		860D6BE02100832E00D05F7F /* firstAudio.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = firstAudio.mp3; sourceTree = "<group>"; };
+		863880442100DA9B009F8A66 /* VCFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCFileManager.h; sourceTree = "<group>"; };
+		863880452100DA9B009F8A66 /* VCFileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCFileManager.m; sourceTree = "<group>"; };
+		863880482100DB17009F8A66 /* FileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
+		863880492100DB17009F8A66 /* FileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		8698297C2100A08900934B9F /* AudioManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		8698297D2100A08900934B9F /* AudioManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
 		869829852100B74A00934B9F /* VCAudioRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCAudioRecorder.h; sourceTree = "<group>"; };
@@ -112,6 +118,7 @@
 		860D6BAA210080A700D05F7F /* AudioPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				863880472100DB00009F8A66 /* FileManager */,
 				8698297F2100B6DB00934B9F /* VC */,
 				8698297B2100A07100934B9F /* AudioManager */,
 				869829882100CB9C00934B9F /* ErrorManger */,
@@ -153,6 +160,24 @@
 			path = mp3;
 			sourceTree = "<group>";
 		};
+		863880432100DA79009F8A66 /* VCFileManager */ = {
+			isa = PBXGroup;
+			children = (
+				863880442100DA9B009F8A66 /* VCFileManager.h */,
+				863880452100DA9B009F8A66 /* VCFileManager.m */,
+			);
+			path = VCFileManager;
+			sourceTree = "<group>";
+		};
+		863880472100DB00009F8A66 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				863880482100DB17009F8A66 /* FileManager.h */,
+				863880492100DB17009F8A66 /* FileManager.m */,
+			);
+			path = FileManager;
+			sourceTree = "<group>";
+		};
 		8698297B2100A07100934B9F /* AudioManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +190,7 @@
 		8698297F2100B6DB00934B9F /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				863880432100DA79009F8A66 /* VCFileManager */,
 				869829802100B6EF00934B9F /* AudioPlayer */,
 				869829812100B6FA00934B9F /* AudioRecorder */,
 			);
@@ -336,6 +362,8 @@
 			files = (
 				869829872100B74A00934B9F /* VCAudioRecorder.m in Sources */,
 				860D6BDF210080DA00D05F7F /* VCAudioPlayer.m in Sources */,
+				863880462100DA9B009F8A66 /* VCFileManager.m in Sources */,
+				8638804A2100DB17009F8A66 /* FileManager.m in Sources */,
 				8698298C2100CBF900934B9F /* ErrorManager.m in Sources */,
 				860D6BBB210080AA00D05F7F /* main.m in Sources */,
 				8698297E2100A08900934B9F /* AudioManager.m in Sources */,

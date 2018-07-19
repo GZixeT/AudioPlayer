@@ -79,6 +79,13 @@
                                     <constraint firstAttribute="trailing" secondItem="KpL-Fp-GrL" secondAttribute="trailing" constant="16" id="res-9b-CY5"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sze-MR-4h8">
+                                <rect key="frame" x="143.5" y="563" width="88" height="30"/>
+                                <state key="normal" title="File manager"/>
+                                <connections>
+                                    <action selector="bFileManagerAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EjQ-oe-bJE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -86,12 +93,15 @@
                             <constraint firstItem="Pzg-EH-bSq" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="Vlz-8d-D7X"/>
                             <constraint firstItem="Pzg-EH-bSq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Y5W-gL-hpm"/>
                             <constraint firstItem="Pzg-EH-bSq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YMO-FM-g97"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sze-MR-4h8" secondAttribute="bottom" constant="10" id="tvT-wp-Alc"/>
+                            <constraint firstItem="sze-MR-4h8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xmy-l3-tO2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="h3a-ah-CbC"/>
                     <connections>
+                        <outlet property="bFileManager" destination="sze-MR-4h8" id="lAU-O9-dzl"/>
                         <outlet property="bPlay" destination="8pN-ck-o7m" id="nnB-bq-zt5"/>
                         <outlet property="bStop" destination="KpL-Fp-GrL" id="9DC-no-afs"/>
                         <outlet property="lbTime" destination="8gS-FN-6rz" id="dtW-lf-8My"/>
@@ -101,6 +111,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-385" y="60"/>
+        </scene>
+        <!--File Manager-->
+        <scene sceneID="3in-H3-twf">
+            <objects>
+                <viewController storyboardIdentifier="FileManager" id="BHd-3m-ymR" customClass="VCFileManager" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dup-zV-fpg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="emO-dh-DLy"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IIs-Fh-8L3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-386" y="758"/>
         </scene>
         <!--Audio Recorder-->
         <scene sceneID="8cH-sO-VUX">
