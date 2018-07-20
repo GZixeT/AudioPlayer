@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -119,9 +120,62 @@
                     <view key="view" contentMode="scaleToFill" id="Dup-zV-fpg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="20d-mv-m2r" customClass="FMTable">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FMTCell_Standart" id="fFW-43-5W2" customClass="FMTCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fFW-43-5W2" id="hCo-b4-Lem">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ugj-bf-I4C">
+                                                    <rect key="frame" x="309.5" y="6" width="49.5" height="30"/>
+                                                    <state key="normal" title="Action"/>
+                                                    <connections>
+                                                        <action selector="bAction:" destination="fFW-43-5W2" eventType="touchUpInside" id="Pz4-To-DRC"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fileName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzV-3e-6Pj">
+                                                    <rect key="frame" x="31" y="11" width="262.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="dzV-3e-6Pj" firstAttribute="leading" secondItem="hCo-b4-Lem" secondAttribute="leadingMargin" constant="16" id="1lY-zd-P1K"/>
+                                                <constraint firstItem="Ugj-bf-I4C" firstAttribute="leading" secondItem="dzV-3e-6Pj" secondAttribute="trailing" constant="16" id="H5u-zM-iYZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ugj-bf-I4C" secondAttribute="trailing" constant="16" id="Rnf-Nf-0cs"/>
+                                                <constraint firstItem="dzV-3e-6Pj" firstAttribute="centerY" secondItem="hCo-b4-Lem" secondAttribute="centerY" id="f5L-zL-ooY"/>
+                                                <constraint firstItem="Ugj-bf-I4C" firstAttribute="centerY" secondItem="hCo-b4-Lem" secondAttribute="centerY" id="l9O-G9-hNc"/>
+                                                <constraint firstItem="dzV-3e-6Pj" firstAttribute="width" secondItem="hCo-b4-Lem" secondAttribute="width" multiplier="0.7" id="ndV-JZ-nmI"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="bAction" destination="Ugj-bf-I4C" id="Euc-RX-xdv"/>
+                                            <outlet property="lbFileName" destination="dzV-3e-6Pj" id="Wkd-ai-h7l"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="20d-mv-m2r" firstAttribute="top" secondItem="emO-dh-DLy" secondAttribute="top" id="LFg-qZ-Kap"/>
+                            <constraint firstItem="emO-dh-DLy" firstAttribute="bottom" secondItem="20d-mv-m2r" secondAttribute="bottom" id="XrM-hl-aow"/>
+                            <constraint firstItem="emO-dh-DLy" firstAttribute="trailing" secondItem="20d-mv-m2r" secondAttribute="trailing" id="ie9-1O-9DB"/>
+                            <constraint firstItem="20d-mv-m2r" firstAttribute="leading" secondItem="emO-dh-DLy" secondAttribute="leading" id="jEg-Gn-Ub1"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="emO-dh-DLy"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <connections>
+                        <outlet property="fmtable" destination="20d-mv-m2r" id="7Sh-en-mAH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IIs-Fh-8L3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

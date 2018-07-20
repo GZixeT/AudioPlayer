@@ -10,7 +10,14 @@
 
 @interface FileManager : NSObject
 + (NSArray*) getFileNamesWithPath:(NSString*)path;
-+ (NSArray*) getFileNamesMp3WithPath:(NSString*)path;
++ (NSArray*) getFileNamesMP3andCAFWithPath:(NSString*)path;
++ (NSArray*) getFilePaths:(NSString*)path;
++ (BOOL) isMP3Extension:(NSString*)path;
++ (BOOL) isCafExtension:(NSString*)path;
++ (BOOL) isDirectoryExtension:(NSString*)path;
++ (BOOL) findInDirectory:(NSString*)path fileName:(NSString*)fileName;
 + (void) getAsyncFileNamesWithPath:(NSString*)path handler:(void(^)(NSArray*))files;
-+ (void) getAsyncFileNamesMp3WithPath:(NSString*)path handler:(void(^)(NSArray*))files;
++ (void) getAsyncFileNamesMP3andCAFWithPath:(NSString*)path handler:(void(^)(NSArray*))files;
++ (NSString*) getLastDirectoryPath:(NSString*)path;
++ (NSString*) getDirectoryName:(NSString*)path;
 @end

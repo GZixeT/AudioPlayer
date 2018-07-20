@@ -7,13 +7,15 @@
 //
 #import <AVFoundation/AVFoundation.h>
 #import "VCAudioRecorder.h"
-#include "AudioManager.h"
-#include "ErrorManager.h"
+#import "AudioManager.h"
+#import "ErrorManager.h"
+#import "AudioPlayer.h"
 
 @interface VCAudioRecorder ()
 @property AVAudioRecorder *recorder;
-@property AVAudioPlayer *player;
+@property AudioPlayer *manager;
 @property NSTimer *timerRecord;
+@property int count;
 @end
 
 @implementation VCAudioRecorder
@@ -21,12 +23,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.timerRecord = nil;
+    self.manager = [AudioPlayer sharedInstance];
     self.navigationItem.title = @"Audio Recorder";
-    [AudioManager setSessionCategoryForRecordAndPlayWithError:nil];
-    NSString *path = [NSString stringWithFormat:@"%@/record.caf",[[NSBundle mainBundle]resourcePath]];
-    self.recorder = [AudioManager createAudioRecorderWithFilePath:path error:nil];
     self.lbRecTime.text = @"0";
     self.lbPlayProgress.text = @"0/0";
+    self.count = 0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,6 +36,10 @@
 }
 - (IBAction)bRecAction:(id)sender {
     if(!self.recorder.isRecording) {
+        self.count++;
+        [AudioManager setSessionCategoryForRecordAndPlayWithError:nil];
+        NSString *path = [NSString stringWithFormat:@"%@/record_%d.caf",[[NSBundle mainBundle]resourcePath],self.count];
+        self.recorder = [AudioManager createAudioRecorderWithFilePath:path error:nil];
         [self.recorder record];
         self.timerRecord = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(recordProgress) userInfo:nil repeats:YES];
     }
@@ -56,27 +61,27 @@
     }
 }
 - (IBAction)bPlayAction:(id)sender {
-    if(!self.recorder.isRecording && !self.player.isPlaying) {
+    if(!self.recorder.isRecording) {
         NSError *error = nil;
-        self.player = [AudioManager createAudioPlayerWithFilePath:self.recorder.url.absoluteString error:&error];
+        self.manager.audioPlayer = [AudioManager createAudioPlayerWithFilePath:self.recorder.url.absoluteString error:&error];
         if(!error) {
-            [self.player play];
+            [self.manager.audioPlayer play];
             self.timerRecord = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(playingProgress) userInfo:nil repeats:YES];
         } else [ErrorManager errorWithTitle:@"Ошибка" message:@"Записи еще нет"];
     }
 }
 - (IBAction)bStopPlayAction:(id)sender {
-    if(self.player.isPlaying) {
-        [self.player stop];
+    if(self.manager.audioPlayer.isPlaying) {
+        [self.manager.audioPlayer stop];
         [self.timerRecord invalidate];
         self.timerRecord = nil;
     }
 }
 - (void) playingProgress {
-    float multiplier = [self.player currentTime]/[self.player duration];
-    self.lbPlayProgress.text = [NSString stringWithFormat:@"%d/%d",(int)[self.player currentTime],(int)[self.player duration]];
+    float multiplier = [self.manager.audioPlayer currentTime]/[self.manager.audioPlayer duration];
+    self.lbPlayProgress.text = [NSString stringWithFormat:@"%d/%d",(int)[self.manager.audioPlayer currentTime],(int)[self.manager.audioPlayer duration]];
     self.pbRecord.progress = multiplier;
-    if(!self.player.isPlaying) {
+    if(!self.manager.audioPlayer.isPlaying) {
         [self.timerRecord invalidate];
         self.timerRecord = nil;
     }

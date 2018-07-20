@@ -5,12 +5,10 @@
 //  Created by Георгий Зубков on 19/07/2018.
 //  Copyright © 2018 Георгий Зубков. All rights reserved.
 //
-#import "FileManager.h"
+#import "AudioManager.h"
 #import "VCFileManager.h"
 
 @interface VCFileManager ()
-@property NSArray *files;
-@property NSArray *mp3files;
 @end
 
 @implementation VCFileManager
@@ -18,10 +16,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"File manager";
-    self.files = [FileManager getFileNamesWithPath:[[NSBundle mainBundle]resourcePath]];
-    self.mp3files = [FileManager getFileNamesMp3WithPath:[[NSBundle mainBundle]resourcePath]];
-    NSLog(@"%@",self.files);
-    NSLog(@"%@",self.mp3files);
+    [self.fmtable initTableParams];
+    NSError *sessionError = nil;
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    [audioSession setCategory:AVAudioSessionCategoryPlayback error:&sessionError];
+    [audioSession setActive:YES error:nil];
     // Do any additional setup after loading the view.
 }
 

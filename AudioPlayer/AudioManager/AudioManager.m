@@ -11,34 +11,39 @@
 //https://developer.apple.com/documentation/avfoundation/audio_track_engineering/audio_settings_and_formats/sample_rate_conversion_settings?language=objc
 
 #import "AudioManager.h"
+
 @interface AudioManager()
+@property (nonatomic) AVAudioPlayer *audioPlayer;
 @end
 
 @implementation AudioManager
-+ (AVAudioPlayer*) createAudioPlayerWithFilePath:(NSString*)path error:(NSError**)ourError {
-    NSURL *soundURL = [NSURL URLWithString:path];
++ (void) standartError:(NSError**)outError error:(NSError*)error avtype:(NSString*)type {
+    if(error) {
+        NSLog(@"incorrect %@",type);
+        NSLog(@"Error: %@",error);
+        if(outError)
+            *outError = error;
+    } else NSLog(@"Correct %@",type);
+}
++ (AVAudioPlayer*) createAudioPlayerWithFilePath:(NSString*)path error:(NSError**)outError {
+    NSString *npath = [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
+    NSURL *soundURL = [NSURL URLWithString:npath];
     NSError *error = nil;
     AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:&error];
-    if(error) {
-        NSLog(@"incorrect create AudioPlayer");
-        NSLog(@"Error: %@",error);
-        *ourError = error;
-    } else NSLog(@"Correct creation AudioPlayer");
+    [self standartError:&*outError error:error avtype:@"create AudioPlayer"];
     return audioPlayer;
 }
 + (AVAudioRecorder*) createAudioRecorderWithFilePath:(NSString*)path settings:(NSDictionary*)settings error:(NSError**)outError {
-    NSURL *soundURL = [NSURL URLWithString:path];
+    NSString *npath = [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
+    NSURL *soundURL = [NSURL URLWithString:npath];
     NSError *error = nil;
     AVAudioRecorder *recorder = [[AVAudioRecorder alloc] initWithURL:soundURL settings:settings error:&error];
-    if(error) {
-        NSLog(@"incorrect create AudioRecorder");
-        NSLog(@"Error: %@",error);
-        *outError = error;
-    } else NSLog(@"Correct creation AudioRecorder");
+    [self standartError:&*outError error:error avtype:@"create AudioRecorder"];
     return recorder;
 }
 + (AVAudioRecorder*) createAudioRecorderWithFilePath:(NSString*)path error:(NSError**)outError {
-    NSURL *soundURL = [NSURL URLWithString:path];
+    NSString *npath = [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
+    NSURL *soundURL = [NSURL URLWithString:npath];
     NSError *error = nil;
     NSDictionary *recordSettings = [NSDictionary
                                     dictionaryWithObjectsAndKeys:
@@ -47,31 +52,19 @@
                                     [NSNumber numberWithInt: 2], AVNumberOfChannelsKey,
                                     [NSNumber numberWithFloat:44100.0], AVSampleRateKey, nil];
     AVAudioRecorder *recorder = [[AVAudioRecorder alloc] initWithURL:soundURL settings:recordSettings error:&error];
-    if(error) {
-        NSLog(@"incorrect create AudioRecorder");
-        NSLog(@"Error: %@",error);
-        *outError = error;
-    } else NSLog(@"Correct creation AudioRecorder");
+    [self standartError:&*outError error:error avtype:@"create AudioRecorder"];
     return recorder;
 }
 + (void) setSessionCategoryForRecordAndPlayWithError:(NSError**)outError {
     NSError *sessionError = nil;
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&sessionError];
-    if(sessionError) {
-        NSLog(@"incorrect setCategory 'record and play' AudioSession");
-        NSLog(@"Error: %@",sessionError);
-        *outError = sessionError;
-    } else NSLog(@"Correct setCategory 'record and play' AudioSession");
+    [self standartError:&*outError error:sessionError avtype:@"setCategory AudioSession"];
 }
 + (void) setSessionCategoryForMultiRouteWithError:(NSError**)outError {
     NSError *sessionError = nil;
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setCategory:AVAudioSessionCategoryPlayback error:&sessionError];
-    if(sessionError) {
-        NSLog(@"incorrect setCategory 'multiroute' AudioSession");
-        NSLog(@"Error: %@",sessionError);
-        *outError = sessionError;
-    } else NSLog(@"Correct setCategory 'multiroute' AudioSession");
+    [self standartError:&*outError error:sessionError avtype:@"setCategory AudioSession"];
 }
 @end

@@ -9,9 +9,10 @@
 #import "VCAudioPlayer.h"
 #import "AudioManager.h"
 #import "VCAudioRecorder.h"
+#import "AudioPlayer.h"
 
 @interface VCAudioPlayer () <AVAudioPlayerDelegate>
-@property AVAudioPlayer *audioPlayer;
+@property AudioPlayer *audioPlayer;
 @property NSTimer *trackTimer;
 @end
 
@@ -19,17 +20,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString *path = [NSString stringWithFormat:@"%@/firstAudio.mp3",[[NSBundle mainBundle]resourcePath]];
+    self.audioPlayer = [AudioPlayer sharedInstance];
     self.trackTimer = nil;
     self.navigationItem.title = @"Audio Player";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Record" style:UIBarButtonItemStylePlain target:self action:@selector(goToRecord)];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
-    self.audioPlayer = [AudioManager createAudioPlayerWithFilePath:path error:nil];
-    self.lbTime.text = [NSString stringWithFormat:@"%d/%d",(int)[self.audioPlayer currentTime],(int)[self.audioPlayer duration]];
-    self.audioPlayer.delegate = self;
+    self.lbTime.text = [NSString stringWithFormat:@"0/0"];
     [AudioManager setSessionCategoryForMultiRouteWithError:nil];
-    //[self getFiles:[[NSBundle mainBundle]resourcePath]];
-    // Do any additional setup after loading the view.
 }
 - (IBAction)bFileManagerAction:(id)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -46,15 +43,17 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)bPlayAction:(id)sender {
-    if(!self.audioPlayer.isPlaying) {
-        [self.audioPlayer play];
-        if(!self.trackTimer)
-            self.trackTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(trackProgress) userInfo:nil repeats:YES];
-    }
+    NSString *path = [NSString stringWithFormat:@"%@/firstAudio.mp3",[[NSBundle mainBundle]resourcePath]];
+    self.audioPlayer.audioPlayer = [AudioManager createAudioPlayerWithFilePath:path error:nil];
+    self.lbTime.text = [NSString stringWithFormat:@"%d/%d",(int)[self.audioPlayer.audioPlayer currentTime],(int)[self.audioPlayer.audioPlayer duration]];
+    self.audioPlayer.audioPlayer.delegate = self;
+    [self.audioPlayer.audioPlayer play];
+    if(!self.trackTimer)
+        self.trackTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(trackProgress) userInfo:nil repeats:YES];
 }
 - (IBAction)bStopAction:(id)sender {
-    if(self.audioPlayer.isPlaying) {
-        [self.audioPlayer stop];
+    if(self.audioPlayer.audioPlayer.isPlaying) {
+        [self.audioPlayer.audioPlayer stop];
         [self.trackTimer invalidate];
         self.trackTimer = nil;
     }
@@ -66,10 +65,10 @@
     }
 }
 - (void) trackProgress {
-    float multiplier = [self.audioPlayer currentTime]/[self.audioPlayer duration];
+    float multiplier = [self.audioPlayer.audioPlayer currentTime]/[self.audioPlayer.audioPlayer duration];
     self.pbAudioTrack.progress = multiplier;
-    self.lbTime.text = [NSString stringWithFormat:@"%d/%d",(int)[self.audioPlayer currentTime],(int)[self.audioPlayer duration]];
-    if(!self.audioPlayer.isPlaying){
+    self.lbTime.text = [NSString stringWithFormat:@"%d/%d",(int)[self.audioPlayer.audioPlayer currentTime],(int)[self.audioPlayer.audioPlayer duration]];
+    if(!self.audioPlayer.audioPlayer.isPlaying){
         [self.trackTimer invalidate];
         self.trackTimer = nil;
     }
