@@ -16,10 +16,12 @@
 @property NSArray *pathArray;
 @property NSArray *fileNames;
 @property NSString *currentPath;
+@property NSIndexPath *lastPlaying;
 @end
 
 @implementation FMTable
 - (void) initTableParams {
+    self.lastPlaying = nil;
     self.delegate = self;
     self.dataSource = self;
     self.tableFooterView = [[UIView alloc]init];
@@ -47,6 +49,13 @@
     [self setFilePaths];
     [self reloadData];
 }
+- (void) setLastPlayingCell:(NSIndexPath *)indexPath  {
+    if(self.lastPlaying && self.lastPlaying !=indexPath) {
+        FMTCell *cell = [self cellForRowAtIndexPath:self.lastPlaying];
+        [cell stop];
+    }
+    self.lastPlaying = indexPath;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     FMTCell *cell = [tableView dequeueReusableCellWithIdentifier:FMTCELL_ID forIndexPath:indexPath];
     cell.indexPath = indexPath;
@@ -63,12 +72,6 @@
     self.rowHeight = ROW_HEIGHT;
     return cell;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
+
 
 @end

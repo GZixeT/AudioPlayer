@@ -26,10 +26,13 @@ typedef enum {
 @property id <FMTCellDelegate> delegate;
 - (void) setButtonTypeWithPath:(NSString*)path;
 - (void) setButtonTypeLastDirectory;
+- (void) stop;
+- (void) play;
 @end
 
 @protocol FMTCellDelegate
 @optional
+- (void) setLastPlayingCell:(NSIndexPath*)indexPath;
 - (void) goToNextDirectoryWithIndexPath:(NSIndexPath*)indexPath;
 - (void) goToLastDirectory;
 @end

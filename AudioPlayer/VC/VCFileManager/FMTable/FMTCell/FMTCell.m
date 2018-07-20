@@ -48,25 +48,28 @@
 - (IBAction)bAction:(id)sender {
     [self typeAction];
 }
+- (void) stop {
+    [self.bAction setTitle:@"Play" forState:(UIControlStateNormal)];
+    self.btype = ButtonTypePlayerPlay;
+    [[AudioPlayer sharedInstance].audioPlayer stop];
+}
+- (void) play {
+    [self.delegate setLastPlayingCell:self.indexPath];
+    [self.bAction setTitle:@"Stop" forState:(UIControlStateNormal)];
+    [AudioPlayer sharedInstance].audioPlayer = [AudioManager createAudioPlayerWithFilePath:self.path error:nil];
+    [[AudioPlayer sharedInstance].audioPlayer play];
+    self.btype = ButtonTypePlayerStop;
+}
 - (void) typeAction {
     switch (self.btype) {
         case ButtonTypeDirectory:
             [self.delegate goToNextDirectoryWithIndexPath:self.indexPath];
             break;
-        case ButtonTypePlayerPlay:{
-            NSError *sessionError = nil;
-            AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-            [audioSession setCategory:AVAudioSessionCategoryPlayback error:&sessionError];
-            [self.bAction setTitle:@"Stop" forState:(UIControlStateNormal)];
-            [AudioPlayer sharedInstance].audioPlayer = [AudioManager createAudioPlayerWithFilePath:self.path error:nil];
-            [[AudioPlayer sharedInstance].audioPlayer play];
-            self.btype = ButtonTypePlayerStop;
-        }
+        case ButtonTypePlayerPlay:
+            [self play];
             break;
         case ButtonTypePlayerStop:
-            [self.bAction setTitle:@"Play" forState:(UIControlStateNormal)];
-            self.btype = ButtonTypePlayerPlay;
-            [[AudioPlayer sharedInstance].audioPlayer stop];
+            [self stop];
             break;
         case ButtonTypeLastDirectory:
             [self.delegate goToLastDirectory];
