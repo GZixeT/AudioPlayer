@@ -5,6 +5,7 @@
 //  Created by Георгий Зубков on 19/07/2018.
 //  Copyright © 2018 Георгий Зубков. All rights reserved.
 //
+#import "AppManager.h"
 #import "AudioManager.h"
 #import "VCFileManager.h"
 #import "VCAudioPlayer.h"
@@ -41,9 +42,10 @@
             [self.fmtable setAllMedia];
             break;
         case ManagerTypeFolders:
-            [self.fmtable setFilePaths];
+            [self.fmtable setFilePaths:[AppManager mainAppFolder]];
             break;
         case ManagerTypeRecords:
+            [self.fmtable setFilePaths:[AppManager standartRecordFolder]];
             break;
             
         default:

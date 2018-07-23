@@ -31,13 +31,13 @@
     self.delegate = self;
     self.dataSource = self;
     self.tableFooterView = [[UIView alloc]init];
-    self.currentPath = [AppManager mainAppFolder];
 }
 - (void) setAllMedia {
     MPMediaQuery *qu = [MPMediaQuery songsQuery];
     self.songs = qu.items;
 }
-- (void) setFilePaths {
+- (void) setFilePaths:(NSString*)path {
+    self.currentPath = path;
     NSArray *array = [FileManager getFilePaths:self.currentPath];
     self.pathArray = [self filter:array];
     self.fileNames = [self fileNamesAtPathArray:self.pathArray];
@@ -71,17 +71,18 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(self.songs) return self.songs.count;
+    else if([self.currentPath isEqualToString:[AppManager standartRecordFolder]]) return self.pathArray.count;
     return self.pathArray.count + 1;
 }
 - (void) goToLastDirectory {
     self.currentPath = [FileManager getLastDirectoryPath:self.currentPath];
-    [self setFilePaths];
+    [self setFilePaths:self.currentPath];
     [self reloadData];
 }
 - (void) goToNextDirectoryWithIndexPath:(NSIndexPath*)indexPath {
     FMTCell *cell = [self cellForRowAtIndexPath:indexPath];
     self.currentPath = [NSString stringWithFormat:@"%@/%@",self.currentPath,cell.lbFileName.text];
-    [self setFilePaths];
+    [self setFilePaths:self.currentPath];
     [self reloadData];
 }
 - (void) setLastPlayingCell:(NSIndexPath *)indexPath  {
@@ -100,7 +101,9 @@
     if(self.songs) {
         [self initAllMediaTypeCellAtIndexPath:indexPath cell:cell];
     } else if (self.pathArray) {
-        [self initFolderTypeCellAtIndexPath:indexPath cell:cell];
+        if([self.currentPath isEqualToString:[AppManager standartRecordFolder]])
+           [self initRecordsTypeCellAtIndexPath:indexPath cell:cell];
+        else [self initFolderTypeCellAtIndexPath:indexPath cell:cell];
     }
     cell.delegate = self;
     self.rowHeight = ROW_HEIGHT;
@@ -116,6 +119,11 @@
         cell.path = self.pathArray[indexPath.row - 1];
         [cell setButtonTypeWithPath:self.fileNames[indexPath.row -1]];
     }
+}
+- (void) initRecordsTypeCellAtIndexPath:(NSIndexPath*)indexPath cell:(FMTCell*)cell {
+    cell.lbFileName .text = self.fileNames[indexPath.row];
+    cell.path = self.pathArray[indexPath.row];
+    [cell setButtonTypeWithPath:self.fileNames[indexPath.row]];
 }
 - (void) initAllMediaTypeCellAtIndexPath:(NSIndexPath*)indexPath cell:(FMTCell*)cell {
     MPMediaItem *item = self.songs[indexPath.row];

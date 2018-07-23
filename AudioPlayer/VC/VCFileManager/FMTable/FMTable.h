@@ -12,7 +12,7 @@
 @property id <FMTableDelegate> fmdelegate;
 - (void) initTableParams;
 - (void) setAllMedia;
-- (void) setFilePaths;
+- (void) setFilePaths:(NSString*)path;
 @end
 
 @protocol FMTableDelegate

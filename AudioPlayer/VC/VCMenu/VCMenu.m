@@ -27,10 +27,22 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)bFileManagerAction:(id)sender {
+- (IBAction)bFoldersAction:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    VCFileManager *fileMenager = [storyboard instantiateViewControllerWithIdentifier:@"FileManager"];
+    fileMenager.type = ManagerTypeFolders;
+    [self.navigationController pushViewController:fileMenager animated:YES];
+}
+- (IBAction)bItunesAction:(id)sender {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     VCFileManager *fileMenager = [storyboard instantiateViewControllerWithIdentifier:@"FileManager"];
     fileMenager.type = ManagerTypeAllMedia;
+    [self.navigationController pushViewController:fileMenager animated:YES];
+}
+- (IBAction)bRecordsAction:(id)sender {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    VCFileManager *fileMenager = [storyboard instantiateViewControllerWithIdentifier:@"FileManager"];
+    fileMenager.type = ManagerTypeRecords;
     [self.navigationController pushViewController:fileMenager animated:YES];
 }
 

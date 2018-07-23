@@ -43,18 +43,42 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EFB-YD-eac">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="45.5"/>
                                         <color key="backgroundColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="File Manager"/>
+                                        <state key="normal" title="По папкам"/>
                                         <connections>
-                                            <action selector="bFileManagerAction:" destination="AMH-2q-Gev" eventType="touchUpInside" id="SlZ-0L-gzP"/>
+                                            <action selector="bFoldersAction:" destination="AMH-2q-Gev" eventType="touchUpInside" id="tcW-Yt-3wO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gkf-gW-5VV">
+                                        <rect key="frame" x="0.0" y="45.5" width="375" height="45.5"/>
+                                        <color key="backgroundColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="По itunes"/>
+                                        <connections>
+                                            <action selector="bItunesAction:" destination="AMH-2q-Gev" eventType="touchUpInside" id="EPM-8l-ijk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Az-ke-H3F">
+                                        <rect key="frame" x="0.0" y="91" width="375" height="45.5"/>
+                                        <color key="backgroundColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="По записям"/>
+                                        <connections>
+                                            <action selector="bRecordsAction:" destination="AMH-2q-Gev" eventType="touchUpInside" id="Mhx-AQ-gt0"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstItem="2Az-ke-H3F" firstAttribute="width" secondItem="NQ8-2l-9Ar" secondAttribute="width" id="EVe-FW-UEZ"/>
                                     <constraint firstItem="EFB-YD-eac" firstAttribute="width" secondItem="NQ8-2l-9Ar" secondAttribute="width" id="ErN-ep-Sab"/>
                                     <constraint firstItem="EFB-YD-eac" firstAttribute="leading" secondItem="NQ8-2l-9Ar" secondAttribute="leading" id="L3b-mc-MLg"/>
+                                    <constraint firstItem="Gkf-gW-5VV" firstAttribute="leading" secondItem="NQ8-2l-9Ar" secondAttribute="leading" id="NnF-V6-BlD"/>
+                                    <constraint firstItem="Gkf-gW-5VV" firstAttribute="width" secondItem="NQ8-2l-9Ar" secondAttribute="width" id="Ogk-ag-IVP"/>
                                     <constraint firstItem="EFB-YD-eac" firstAttribute="height" secondItem="NQ8-2l-9Ar" secondAttribute="height" multiplier="1/4" id="Veg-Io-9bg"/>
                                     <constraint firstItem="EFB-YD-eac" firstAttribute="top" secondItem="NQ8-2l-9Ar" secondAttribute="top" id="XWv-vB-TJP"/>
+                                    <constraint firstItem="2Az-ke-H3F" firstAttribute="height" secondItem="NQ8-2l-9Ar" secondAttribute="height" multiplier="1/4" id="d4d-Sk-H09"/>
+                                    <constraint firstItem="2Az-ke-H3F" firstAttribute="top" secondItem="Gkf-gW-5VV" secondAttribute="bottom" id="ezo-VL-ZNJ"/>
+                                    <constraint firstItem="2Az-ke-H3F" firstAttribute="leading" secondItem="NQ8-2l-9Ar" secondAttribute="leading" id="f2p-6B-hzl"/>
+                                    <constraint firstItem="Gkf-gW-5VV" firstAttribute="top" secondItem="EFB-YD-eac" secondAttribute="bottom" id="fS1-Qc-zKD"/>
+                                    <constraint firstItem="Gkf-gW-5VV" firstAttribute="height" secondItem="NQ8-2l-9Ar" secondAttribute="height" multiplier="1/4" id="whs-fA-7IM"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4f-kY-356">
@@ -76,6 +100,11 @@
                         <viewLayoutGuide key="safeArea" id="Xeb-uD-3ki"/>
                     </view>
                     <navigationItem key="navigationItem" id="sB6-dm-YAx"/>
+                    <connections>
+                        <outlet property="bFolders" destination="EFB-YD-eac" id="rvP-dX-Tdv"/>
+                        <outlet property="bItunes" destination="Gkf-gW-5VV" id="nJo-1V-vfn"/>
+                        <outlet property="bRecords" destination="2Az-ke-H3F" id="NtX-z2-hw3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qJw-IO-y8H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
