@@ -12,6 +12,7 @@
 
 @interface FMTCell() <AVAudioPlayerDelegate>
 @property ButtonType btype;
+@property BOOL buttonAction;
 @end
 
 @implementation FMTCell
@@ -26,8 +27,13 @@
 }
 - (void) setButtonTypeWithPath:(NSString*)path {
     if([FileManager isMP3Extension:path] || [FileManager isCafExtension:path]){
-        [self.bAction setTitle:@"Play" forState:(UIControlStateNormal)];
-        self.btype = ButtonTypePlayerPlay;
+        if([AudioPlayer sharedInstance].audioPlayer.isPlaying) {
+            [self.bAction setTitle:@"Stop" forState:(UIControlStateNormal)];
+            self.btype = ButtonTypePlayerStop;
+        } else {
+            [self.bAction setTitle:@"Play" forState:(UIControlStateNormal)];
+            self.btype = ButtonTypePlayerPlay;
+        }
     }
     else if ([FileManager isDirectoryExtension:path]) {
         [self.bAction setTitle:@"Go" forState:(UIControlStateNormal)];
@@ -38,15 +44,25 @@
         self.btype = ButtonTypeBlank;
     }
 }
+- (void) setButtonPlayType {
+    if([AudioPlayer sharedInstance].audioPlayer.isPlaying) {
+        [self.bAction setTitle:@"Stop" forState:(UIControlStateNormal)];
+        self.btype = ButtonTypePlayerStop;
+    } else {
+        [self.bAction setTitle:@"Play" forState:(UIControlStateNormal)];
+        self.btype = ButtonTypePlayerPlay;
+    }
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     if(selected)
-        [self typeAction];
+        [self action];
     // Configure the view for the selected state
 }
 
 - (IBAction)bAction:(id)sender {
-    [self typeAction];
+    self.buttonAction = YES;
+    [self action];
 }
 - (void) stop {
     [self.bAction setTitle:@"Play" forState:(UIControlStateNormal)];
@@ -56,19 +72,28 @@
 - (void) play {
     [self.delegate setLastPlayingCell:self.indexPath];
     [self.bAction setTitle:@"Stop" forState:(UIControlStateNormal)];
-    [AudioPlayer sharedInstance].audioPlayer = [AudioManager createAudioPlayerWithFilePath:self.path error:nil];
+    if([self.path isKindOfClass:[NSString class]]) {
+        [AudioPlayer sharedInstance].audioPlayer = [AudioManager createAudioPlayerWithFilePath:self.path error:nil];
+    } else if([self.path isKindOfClass:[NSURL class]]) {
+        [AudioPlayer sharedInstance].audioPlayer = [AudioManager createAudioPlayerWithURL:self.path error:nil];
+    }
     [[AudioPlayer sharedInstance].audioPlayer play];
     self.btype = ButtonTypePlayerStop;
 }
-- (void) typeAction {
+- (void) action {
     switch (self.btype) {
         case ButtonTypeDirectory:
             [self.delegate goToNextDirectoryWithIndexPath:self.indexPath];
             break;
         case ButtonTypePlayerPlay:
             [self play];
+            if(self.selected)[self.delegate goToAudioPlayer];
             break;
         case ButtonTypePlayerStop:
+            if(self.selected && !self.buttonAction){
+                [self.delegate goToAudioPlayer];
+                break;
+            }
             [self stop];
             break;
         case ButtonTypeLastDirectory:
@@ -77,5 +102,6 @@
         default:
             break;
     }
+    self.buttonAction = NO;
 }
 @end

@@ -7,8 +7,9 @@
 //
 #import "AudioManager.h"
 #import "VCFileManager.h"
+#import "VCAudioPlayer.h"
 
-@interface VCFileManager ()
+@interface VCFileManager () <FMTableDelegate>
 @end
 
 @implementation VCFileManager
@@ -17,16 +18,37 @@
     [super viewDidLoad];
     self.navigationItem.title = @"File manager";
     [self.fmtable initTableParams];
+    [self initTableWithType];
+    self.fmtable.fmdelegate = self;
     NSError *sessionError = nil;
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setCategory:AVAudioSessionCategoryPlayback error:&sessionError];
     [audioSession setActive:YES error:nil];
     // Do any additional setup after loading the view.
 }
-
+- (void) openVCAudioPlayer {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    VCAudioPlayer *audioPlayer = [storyboard instantiateViewControllerWithIdentifier:@"AudioPlayer"];
+    [self.navigationController pushViewController:audioPlayer animated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void) initTableWithType {
+    switch (self.type) {
+        case ManagerTypeAllMedia:
+            [self.fmtable setAllMedia];
+            break;
+        case ManagerTypeFolders:
+            [self.fmtable setFilePaths];
+            break;
+        case ManagerTypeRecords:
+            break;
+            
+        default:
+            break;
+    }
 }
 /*
 #pragma mark - Navigation

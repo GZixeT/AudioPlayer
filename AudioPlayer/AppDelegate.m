@@ -5,7 +5,7 @@
 //  Created by Георгий Зубков on 19/07/2018.
 //  Copyright © 2018 Георгий Зубков. All rights reserved.
 //
-
+#import "AppManager.h"
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
@@ -16,7 +16,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    if(![AppManager isExistMainAppsFolders])
+        [AppManager createMainAppsFolders];
     return YES;
 }
 

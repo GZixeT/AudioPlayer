@@ -20,8 +20,12 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription key with a string value explaining to the user how the app uses this data</key>
+	<string>музыку хочу</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>USE YOUR MICROPHPNE</string>
+    <key>NSAppleMusicUsageDescription</key>
+    <string>USE MUSIC</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

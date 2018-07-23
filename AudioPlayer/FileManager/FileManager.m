@@ -82,4 +82,20 @@
 + (NSString*) getDirectoryName:(NSString*)path {
     return [path lastPathComponent];
 }
++ (void) createDirectoryAtPath:(NSString*)path error:(NSError**)outError {
+    NSError *error = nil;
+    [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:NO attributes:nil error:&error];
+    if(error) {
+        if(outError)
+            *outError = error;
+    }
+}
++ (void) removeItemAtPath:(NSString*)path error:(NSError**)outError {
+    NSError *error = nil;
+    [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+    if(error) {
+        if(outError)
+            *outError = error;
+    }
+}
 @end

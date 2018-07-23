@@ -33,6 +33,12 @@
     [self standartError:&*outError error:error avtype:@"create AudioPlayer"];
     return audioPlayer;
 }
++ (AVAudioPlayer*) createAudioPlayerWithURL:(NSURL*)url error:(NSError**)outError {
+    NSError *error = nil;
+    AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+    [self standartError:&*outError error:error avtype:@"create AudioPlayer"];
+    return audioPlayer;
+}
 + (AVAudioRecorder*) createAudioRecorderWithFilePath:(NSString*)path settings:(NSDictionary*)settings error:(NSError**)outError {
     NSString *npath = [path stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
     NSURL *soundURL = [NSURL URLWithString:npath];

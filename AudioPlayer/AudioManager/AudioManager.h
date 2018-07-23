@@ -12,6 +12,7 @@
 @interface AudioManager : NSObject
 + (void) setSessionCategoryForRecordAndPlayWithError:(NSError**)outError;
 + (void) setSessionCategoryForMultiRouteWithError:(NSError**)outError;
++ (AVAudioPlayer*) createAudioPlayerWithURL:(NSURL*)url error:(NSError**)outError;
 + (AVAudioPlayer*) createAudioPlayerWithFilePath:(NSString*)path error:(NSError**)ourError;
 + (AVAudioRecorder*) createAudioRecorderWithFilePath:(NSString*)path error:(NSError**)outError;
 + (AVAudioRecorder*) createAudioRecorderWithFilePath:(NSString*)path settings:(NSDictionary*)settings error:(NSError**)outError;

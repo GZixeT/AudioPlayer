@@ -20,4 +20,6 @@
 + (void) getAsyncFileNamesMP3andCAFWithPath:(NSString*)path handler:(void(^)(NSArray*))files;
 + (NSString*) getLastDirectoryPath:(NSString*)path;
 + (NSString*) getDirectoryName:(NSString*)path;
++ (void) createDirectoryAtPath:(NSString*)path error:(NSError**)outError;
++ (void) removeItemAtPath:(NSString*)path error:(NSError**)outError;
 @end

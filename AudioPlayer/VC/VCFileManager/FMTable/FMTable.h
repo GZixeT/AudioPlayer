@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface FMTable : UITableView 
+@protocol FMTableDelegate;
+@interface FMTable : UITableView
+@property id <FMTableDelegate> fmdelegate;
 - (void) initTableParams;
+- (void) setAllMedia;
+- (void) setFilePaths;
+@end
+
+@protocol FMTableDelegate
+@optional
+- (void) openVCAudioPlayer;
 @end
