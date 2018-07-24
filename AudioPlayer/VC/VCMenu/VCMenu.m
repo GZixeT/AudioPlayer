@@ -7,9 +7,10 @@
 //
 #import "VCMenu.h"
 #import "VCAudioRecorder.h"
-#import "VCFileManager.h"
+#import "VCSongs.h"
+#import "AudioPlayer.h"
 @interface VCMenu ()
-
+@property CAGradientLayer *gradient;
 @end
 
 @implementation VCMenu
@@ -17,6 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Record" style:UIBarButtonItemStylePlain target:self action:@selector(goToRecord)];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
+    self.navigationItem.title = @"Плеер";
+    self.bPlay.layer.cornerRadius = 10;
 }
 - (void) goToRecord {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -27,23 +31,61 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (IBAction)bFoldersAction:(id)sender {
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context){
+        self.gradient.frame = self.vGradient.bounds;
+    }completion:^(id<UIViewControllerTransitionCoordinatorContext> context){
+        
+    }];
+}
+- (void) setGradient {
+    self.gradient = [CAGradientLayer layer];
+    self.gradient.frame = self.vGradient.bounds;
+    self.gradient.colors = @[(id)[UIColor grayColor].CGColor,(id)[UIColor colorWithWhite:0 alpha:0]];
+    self.gradient.startPoint = CGPointMake(0, 1);
+    self.gradient.endPoint = CGPointMake(0, 0);
+    [self.vGradient.layer insertSublayer:self.gradient atIndex:0];
+    //[self.vGradient.layer addSublayer:gradient];
+}
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self setGradient];
+    if(![AudioPlayer sharedInstance].audioPlayer){
+        self.bPlay.hidden = YES;
+        self.lbSongName.text = @"";
+        self.lbArtistName.text = @"";
+    }
+    else {
+        if([AudioPlayer sharedInstance].artwork) {
+            [self.artworkImage setImage:[AudioPlayer sharedInstance].artwork];
+        }else {}
+        self.lbArtistName.text = [AudioPlayer sharedInstance].artist;
+        self.lbSongName.text = [AudioPlayer sharedInstance].title;
+        if([AudioPlayer sharedInstance].audioPlayer.isPlaying) {
+            [self.bPlay setTitle:@"Stop" forState:(UIControlStateNormal)];
+        }
+        else [self.bPlay setTitle:@"Play" forState:(UIControlStateNormal)];
+        self.bPlay.hidden = NO;
+    }
+}
+- (void) goToVCSongs {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    VCFileManager *fileMenager = [storyboard instantiateViewControllerWithIdentifier:@"FileManager"];
-    fileMenager.type = ManagerTypeFolders;
-    [self.navigationController pushViewController:fileMenager animated:YES];
+    VCSongs *songs = [storyboard instantiateViewControllerWithIdentifier:@"Songs"];
+    [self.navigationController pushViewController:songs animated:YES];
 }
 - (IBAction)bItunesAction:(id)sender {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    VCFileManager *fileMenager = [storyboard instantiateViewControllerWithIdentifier:@"FileManager"];
-    fileMenager.type = ManagerTypeAllMedia;
-    [self.navigationController pushViewController:fileMenager animated:YES];
+    [self goToVCSongs];
 }
-- (IBAction)bRecordsAction:(id)sender {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    VCFileManager *fileMenager = [storyboard instantiateViewControllerWithIdentifier:@"FileManager"];
-    fileMenager.type = ManagerTypeRecords;
-    [self.navigationController pushViewController:fileMenager animated:YES];
+- (IBAction)bPlayAction:(id)sender {
+    if([AudioPlayer sharedInstance].audioPlayer.isPlaying){
+        [[AudioPlayer sharedInstance].audioPlayer stop];
+        [self.bPlay setTitle:@"Play" forState:(UIControlStateNormal)];
+    } else {
+        [[AudioPlayer sharedInstance].audioPlayer play];
+        [self.bPlay setTitle:@"Stop" forState:(UIControlStateNormal)];
+    }
+    
 }
 
 /*

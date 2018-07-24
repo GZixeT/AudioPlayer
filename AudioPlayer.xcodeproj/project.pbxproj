@@ -15,13 +15,14 @@
 		860D6BC5210080AA00D05F7F /* AudioPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D6BC4210080AA00D05F7F /* AudioPlayerTests.m */; };
 		860D6BD0210080AA00D05F7F /* AudioPlayerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D6BCF210080AA00D05F7F /* AudioPlayerUITests.m */; };
 		860D6BDF210080DA00D05F7F /* VCAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 860D6BDE210080DA00D05F7F /* VCAudioPlayer.m */; };
-		863880462100DA9B009F8A66 /* VCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 863880452100DA9B009F8A66 /* VCFileManager.m */; };
+		8616D587210736C100AC40FE /* VCRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 8616D586210736C100AC40FE /* VCRecords.m */; };
+		8616D58B21073D4C00AC40FE /* RTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8616D58A21073D4C00AC40FE /* RTCell.m */; };
+		8616D58F210748DC00AC40FE /* STCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8616D58E210748DC00AC40FE /* STCell.m */; };
+		863880462100DA9B009F8A66 /* VCSongs.m in Sources */ = {isa = PBXBuildFile; fileRef = 863880452100DA9B009F8A66 /* VCSongs.m */; };
 		8638804A2100DB17009F8A66 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 863880492100DB17009F8A66 /* FileManager.m */; };
 		8698297E2100A08900934B9F /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8698297D2100A08900934B9F /* AudioManager.m */; };
 		869829872100B74A00934B9F /* VCAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 869829862100B74A00934B9F /* VCAudioRecorder.m */; };
 		8698298C2100CBF900934B9F /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8698298B2100CBF900934B9F /* AlertManager.m */; };
-		869959BF2101E34F0062029F /* FMTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 869959BE2101E34F0062029F /* FMTable.m */; };
-		869959C32101E8C40062029F /* FMTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 869959C22101E8C40062029F /* FMTCell.m */; };
 		869959CF2102095D0062029F /* AudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 869959CE2102095D0062029F /* AudioPlayer.m */; };
 		86BF31BF2105CC2800522FB4 /* AppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 86BF31BE2105CC2800522FB4 /* AppManager.m */; };
 		86BF31C42105D02600522FB4 /* RLMFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 86BF31C32105D02600522FB4 /* RLMFolder.m */; };
@@ -71,8 +72,14 @@
 		860D6BD1210080AA00D05F7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		860D6BDD210080DA00D05F7F /* VCAudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCAudioPlayer.h; sourceTree = "<group>"; };
 		860D6BDE210080DA00D05F7F /* VCAudioPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCAudioPlayer.m; sourceTree = "<group>"; };
-		863880442100DA9B009F8A66 /* VCFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCFileManager.h; sourceTree = "<group>"; };
-		863880452100DA9B009F8A66 /* VCFileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCFileManager.m; sourceTree = "<group>"; };
+		8616D585210736C100AC40FE /* VCRecords.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCRecords.h; sourceTree = "<group>"; };
+		8616D586210736C100AC40FE /* VCRecords.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCRecords.m; sourceTree = "<group>"; };
+		8616D58921073D4C00AC40FE /* RTCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RTCell.h; sourceTree = "<group>"; };
+		8616D58A21073D4C00AC40FE /* RTCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RTCell.m; sourceTree = "<group>"; };
+		8616D58D210748DC00AC40FE /* STCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STCell.h; sourceTree = "<group>"; };
+		8616D58E210748DC00AC40FE /* STCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STCell.m; sourceTree = "<group>"; };
+		863880442100DA9B009F8A66 /* VCSongs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCSongs.h; sourceTree = "<group>"; };
+		863880452100DA9B009F8A66 /* VCSongs.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCSongs.m; sourceTree = "<group>"; };
 		863880482100DB17009F8A66 /* FileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
 		863880492100DB17009F8A66 /* FileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		8698297C2100A08900934B9F /* AudioManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
@@ -81,10 +88,6 @@
 		869829862100B74A00934B9F /* VCAudioRecorder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCAudioRecorder.m; sourceTree = "<group>"; };
 		8698298A2100CBF900934B9F /* AlertManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertManager.h; sourceTree = "<group>"; };
 		8698298B2100CBF900934B9F /* AlertManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertManager.m; sourceTree = "<group>"; };
-		869959BD2101E34F0062029F /* FMTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMTable.h; sourceTree = "<group>"; };
-		869959BE2101E34F0062029F /* FMTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMTable.m; sourceTree = "<group>"; };
-		869959C12101E8C40062029F /* FMTCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMTCell.h; sourceTree = "<group>"; };
-		869959C22101E8C40062029F /* FMTCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMTCell.m; sourceTree = "<group>"; };
 		869959CD2102095D0062029F /* AudioPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioPlayer.h; sourceTree = "<group>"; };
 		869959CE2102095D0062029F /* AudioPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioPlayer.m; sourceTree = "<group>"; };
 		86BF31BD2105CC2800522FB4 /* AppManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppManager.h; sourceTree = "<group>"; };
@@ -170,7 +173,7 @@
 				863880472100DB00009F8A66 /* FileManager */,
 				8698297F2100B6DB00934B9F /* VC */,
 				8698297B2100A07100934B9F /* AudioManager */,
-				869829882100CB9C00934B9F /* ErrorManger */,
+				869829882100CB9C00934B9F /* AlertManager */,
 				860D6BAB210080A700D05F7F /* AppDelegate.h */,
 				860D6BAC210080A700D05F7F /* AppDelegate.m */,
 				860D6BB1210080A800D05F7F /* Main.storyboard */,
@@ -200,12 +203,40 @@
 			path = AudioPlayerUITests;
 			sourceTree = "<group>";
 		};
+		8616D584210736AB00AC40FE /* VCRecords */ = {
+			isa = PBXGroup;
+			children = (
+				8616D58821073D2600AC40FE /* RTCell */,
+				8616D585210736C100AC40FE /* VCRecords.h */,
+				8616D586210736C100AC40FE /* VCRecords.m */,
+			);
+			path = VCRecords;
+			sourceTree = "<group>";
+		};
+		8616D58821073D2600AC40FE /* RTCell */ = {
+			isa = PBXGroup;
+			children = (
+				8616D58921073D4C00AC40FE /* RTCell.h */,
+				8616D58A21073D4C00AC40FE /* RTCell.m */,
+			);
+			path = RTCell;
+			sourceTree = "<group>";
+		};
+		8616D58C210748C800AC40FE /* STCell */ = {
+			isa = PBXGroup;
+			children = (
+				8616D58D210748DC00AC40FE /* STCell.h */,
+				8616D58E210748DC00AC40FE /* STCell.m */,
+			);
+			path = STCell;
+			sourceTree = "<group>";
+		};
 		863880432100DA79009F8A66 /* VCFileManager */ = {
 			isa = PBXGroup;
 			children = (
-				869959BC2101E32A0062029F /* FMTable */,
-				863880442100DA9B009F8A66 /* VCFileManager.h */,
-				863880452100DA9B009F8A66 /* VCFileManager.m */,
+				8616D58C210748C800AC40FE /* STCell */,
+				863880442100DA9B009F8A66 /* VCSongs.h */,
+				863880452100DA9B009F8A66 /* VCSongs.m */,
 			);
 			path = VCFileManager;
 			sourceTree = "<group>";
@@ -231,6 +262,7 @@
 		8698297F2100B6DB00934B9F /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				8616D584210736AB00AC40FE /* VCRecords */,
 				86BF31C721061A3600522FB4 /* VCMenu */,
 				863880432100DA79009F8A66 /* VCFileManager */,
 				869829802100B6EF00934B9F /* VCAudioPlayer */,
@@ -257,32 +289,13 @@
 			path = VCAudioRecorder;
 			sourceTree = "<group>";
 		};
-		869829882100CB9C00934B9F /* ErrorManger */ = {
+		869829882100CB9C00934B9F /* AlertManager */ = {
 			isa = PBXGroup;
 			children = (
 				8698298A2100CBF900934B9F /* AlertManager.h */,
 				8698298B2100CBF900934B9F /* AlertManager.m */,
 			);
-			path = ErrorManger;
-			sourceTree = "<group>";
-		};
-		869959BC2101E32A0062029F /* FMTable */ = {
-			isa = PBXGroup;
-			children = (
-				869959C02101E8A80062029F /* FMTCell */,
-				869959BD2101E34F0062029F /* FMTable.h */,
-				869959BE2101E34F0062029F /* FMTable.m */,
-			);
-			path = FMTable;
-			sourceTree = "<group>";
-		};
-		869959C02101E8A80062029F /* FMTCell */ = {
-			isa = PBXGroup;
-			children = (
-				869959C12101E8C40062029F /* FMTCell.h */,
-				869959C22101E8C40062029F /* FMTCell.m */,
-			);
-			path = FMTCell;
+			path = AlertManager;
 			sourceTree = "<group>";
 		};
 		869959CC210209280062029F /* AudioPlayer */ = {
@@ -538,17 +551,18 @@
 			files = (
 				869829872100B74A00934B9F /* VCAudioRecorder.m in Sources */,
 				86BF31CA21061A5000522FB4 /* VCMenu.m in Sources */,
-				869959C32101E8C40062029F /* FMTCell.m in Sources */,
 				860D6BDF210080DA00D05F7F /* VCAudioPlayer.m in Sources */,
-				863880462100DA9B009F8A66 /* VCFileManager.m in Sources */,
+				863880462100DA9B009F8A66 /* VCSongs.m in Sources */,
 				869959CF2102095D0062029F /* AudioPlayer.m in Sources */,
 				8638804A2100DB17009F8A66 /* FileManager.m in Sources */,
 				8698298C2100CBF900934B9F /* AlertManager.m in Sources */,
 				860D6BBB210080AA00D05F7F /* main.m in Sources */,
+				8616D58F210748DC00AC40FE /* STCell.m in Sources */,
+				8616D58B21073D4C00AC40FE /* RTCell.m in Sources */,
 				8698297E2100A08900934B9F /* AudioManager.m in Sources */,
 				860D6BAD210080A700D05F7F /* AppDelegate.m in Sources */,
-				869959BF2101E34F0062029F /* FMTable.m in Sources */,
 				86BF31C42105D02600522FB4 /* RLMFolder.m in Sources */,
+				8616D587210736C100AC40FE /* VCRecords.m in Sources */,
 				86BF31BF2105CC2800522FB4 /* AppManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

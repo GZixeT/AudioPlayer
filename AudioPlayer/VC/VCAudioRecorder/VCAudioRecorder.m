@@ -12,6 +12,7 @@
 #import "AudioPlayer.h"
 #import "FileManager.h"
 #import "AppManager.h"
+#import "VCRecords.h"
 
 @interface VCAudioRecorder ()
 @property AVAudioRecorder *recorder;
@@ -27,11 +28,17 @@
     [super viewDidLoad];
     self.timerRecord = nil;
     self.manager = [AudioPlayer sharedInstance];
-    self.navigationItem.title = @"Audio Recorder";
+    self.navigationItem.title = @"Диктофон";
     self.lbRecTime.text = @"0";
     self.count = [FileManager getFileNamesWithPath:[AppManager standartRecordFolder]].count;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Записи" style:UIBarButtonItemStylePlain target:self action:@selector(goToRecords)];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
 }
-
+- (void) goToRecords {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    VCRecords *records = [storyboard instantiateViewControllerWithIdentifier:@"Records"];
+    [self.navigationController pushViewController:records animated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

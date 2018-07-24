@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface VCMenu : UIViewController
-@property (weak, nonatomic) IBOutlet UIButton *bFolders;
+@property (weak, nonatomic) IBOutlet UIView *vGradient;
+@property (weak, nonatomic) IBOutlet UIButton *bPlay;
+@property (weak, nonatomic) IBOutlet UILabel *lbArtistName;
+@property (weak, nonatomic) IBOutlet UILabel *lbSongName;
 @property (weak, nonatomic) IBOutlet UIButton *bItunes;
-@property (weak, nonatomic) IBOutlet UIButton *bRecords;
-
+@property (weak, nonatomic) IBOutlet UIImageView *artworkImage;
 @end

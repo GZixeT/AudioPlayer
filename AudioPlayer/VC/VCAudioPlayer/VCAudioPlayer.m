@@ -22,8 +22,7 @@
     [super viewDidLoad];
     self.audioPlayer = [AudioPlayer sharedInstance];
     self.trackTimer = nil;
-    //self.navigationItem.title = @"Audio Player";
-    self.navigationItem.title = [[AudioPlayer sharedInstance].audioPlayer.url.absoluteString lastPathComponent];
+    self.navigationItem.title = @"Плеер";
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
     [AudioManager setSessionCategoryForMultiRouteWithError:nil];
 }

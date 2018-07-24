@@ -11,6 +11,9 @@
 
 @interface AudioPlayer : NSObject
 @property AVAudioPlayer *audioPlayer;
+@property UIImage *artwork;
+@property NSString *title;
+@property NSString *artist;
 + (instancetype) sharedInstance;
 - (void) setAudioPlayer:(AVAudioPlayer *)audioPlayer;
 - (AVAudioPlayer*) audioPlayer;
