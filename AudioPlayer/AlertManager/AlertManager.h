@@ -10,4 +10,5 @@
 
 @interface AlertManager : NSObject
 + (void) alertWithTitle:(NSString*)title message:(NSString*)message;
++ (void) alertForActionWithTitle:(NSString*)title message:(NSString*)message action:(void(^)(void))bAction;
 @end
