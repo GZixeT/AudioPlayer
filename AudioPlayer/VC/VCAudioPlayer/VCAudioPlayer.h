@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface VCAudioPlayer : UIViewController 
+@property (weak, nonatomic) IBOutlet UILabel *lbArtistAndSong;
+@property (weak, nonatomic) IBOutlet UIImageView *artworkImageView;
+@property (weak, nonatomic) IBOutlet UILabel *lbTimeRight;
 @property (weak, nonatomic) IBOutlet UIButton *bPlay;
 @property (weak, nonatomic) IBOutlet UIProgressView *pbAudioTrack;
-@property (strong, nonatomic) IBOutlet UILabel *lbTime;
+@property (strong, nonatomic) IBOutlet UILabel *lbTimeLeft;
 @end

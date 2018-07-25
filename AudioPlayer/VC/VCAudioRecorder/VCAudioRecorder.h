@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface VCAudioRecorder : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *lbRecordName;
 @property (weak, nonatomic) IBOutlet UILabel *lbRecTime;
 @property (weak, nonatomic) IBOutlet UIButton *bRec;
 @end

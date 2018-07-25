@@ -20,7 +20,10 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Record" style:UIBarButtonItemStylePlain target:self action:@selector(goToRecord)];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
     self.navigationItem.title = @"Плеер";
-    self.bPlay.layer.cornerRadius = 10;
+    self.bPlay.layer.cornerRadius = self.bPlay.frame.size.width/2;
+    self.bPlay.layer.borderWidth = 2.f;
+    self.bPlay.layer.borderColor = [UIColor blackColor].CGColor;
+    [self setGradient];
 }
 - (void) goToRecord {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -39,6 +42,10 @@
         
     }];
 }
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.gradient.frame = self.vGradient.bounds;
+}
 - (void) setGradient {
     self.gradient = [CAGradientLayer layer];
     self.gradient.frame = self.vGradient.bounds;
@@ -50,7 +57,6 @@
 }
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self setGradient];
     if(![AudioPlayer sharedInstance].audioPlayer){
         self.bPlay.hidden = YES;
         self.lbSongName.text = @"";
