@@ -75,7 +75,8 @@
         self.timerRecord = nil;
         [self.bRec setTitle:@"Rec" forState:(UIControlStateNormal)];
         [AlertManager alertWithTitle:@"Успех" message:[NSString stringWithFormat:@"Запись сохранена:%@",[self.recordPath lastPathComponent]]];
-        [self recordPath];
+        [self setRecordPath];
+        [self setTime];
     }
 }
 - (void) recordProgress {

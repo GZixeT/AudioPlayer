@@ -30,6 +30,7 @@ static AudioPlayer *sharedInstance = nil;
 - (instancetype) init {
     if(self = [super init]) {
         self.audioPlayer = nil;
+        self.artwork = nil;
     }
     return self;
 }

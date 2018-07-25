@@ -42,7 +42,12 @@
     self.artworkImageView.clipsToBounds = YES;
     self.artworkImageView.layer.borderWidth = 3.f;
     self.artworkImageView.layer.borderColor = [UIColor whiteColor].CGColor;
-    [self.artworkImageView setImage:self.audioPlayer.artwork];
+    if(self.audioPlayer.artwork){
+        [self.artworkImageView setImage:self.audioPlayer.artwork];
+    } else {
+        self.artworkImageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.artworkImageView setImage:[UIImage imageNamed:@"musical-note"]];
+    }
     [self setTime];
 }
 - (void) viewWillAppear:(BOOL)animated {
@@ -76,6 +81,7 @@
     if(!self.audioPlayer.audioPlayer.isPlaying){
         [self.trackTimer invalidate];
         self.trackTimer = nil;
+        [self.bPlay setTitle:@"Play" forState:(UIControlStateNormal)];
     }
 }
 - (void) setTime {

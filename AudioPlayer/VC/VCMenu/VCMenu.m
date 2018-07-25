@@ -19,11 +19,12 @@
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Record" style:UIBarButtonItemStylePlain target:self action:@selector(goToRecord)];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
-    self.navigationItem.title = @"Плеер";
+    self.navigationItem.title = @"Меню";
     self.bPlay.layer.cornerRadius = self.bPlay.frame.size.width/2;
     self.bPlay.layer.borderWidth = 2.f;
     self.bPlay.layer.borderColor = [UIColor blackColor].CGColor;
     [self setGradient];
+    [self setImage];
 }
 - (void) goToRecord {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -46,6 +47,14 @@
     [super viewDidAppear:animated];
     self.gradient.frame = self.vGradient.bounds;
 }
+- (void) setImage {
+    if([AudioPlayer sharedInstance].artwork) {
+        [self.artworkImage setImage:[AudioPlayer sharedInstance].artwork];
+    }else {
+        //self.artworkImage.contentMode = UIViewContentModeScaleAspectFit;
+        [self.artworkImage setImage:[UIImage imageNamed:@"note-st"]];
+    }
+}
 - (void) setGradient {
     self.gradient = [CAGradientLayer layer];
     self.gradient.frame = self.vGradient.bounds;
@@ -63,9 +72,7 @@
         self.lbArtistName.text = @"";
     }
     else {
-        if([AudioPlayer sharedInstance].artwork) {
-            [self.artworkImage setImage:[AudioPlayer sharedInstance].artwork];
-        }else {}
+        [self setImage];
         self.lbArtistName.text = [AudioPlayer sharedInstance].artist;
         self.lbSongName.text = [AudioPlayer sharedInstance].title;
         if([AudioPlayer sharedInstance].audioPlayer.isPlaying) {
