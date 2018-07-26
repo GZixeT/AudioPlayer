@@ -15,6 +15,8 @@
 #import "AlertManager.h"
 #import <Realm.h>
 #import "RLMFolder.h"
+#import "AppManager.h"
+#import "RLMRecords.h"
 
 @interface VCRecords () <UITableViewDelegate, UITableViewDataSource, RTCellDelegate>
 @property NSMutableArray *recordsNames;
@@ -72,6 +74,7 @@
             NSError *error = nil;
             [FileManager removeItemAtPath:cell.filePath error:&error];
             if(!error) {
+                [AppManager deleteObjectForRealm:[RLMRecords objectForPrimaryKey:[NSString stringWithFormat:@"%@/%@",[AppManager recordsBasicPath],cell.lbSongsName.text]]];
                 [self.recordsPaths removeObjectAtIndex:indexPath.row];
                 [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:(UITableViewRowAnimationLeft)];
             }

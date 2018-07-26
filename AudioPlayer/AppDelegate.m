@@ -5,6 +5,7 @@
 //  Created by Георгий Зубков on 19/07/2018.
 //  Copyright © 2018 Георгий Зубков. All rights reserved.
 //
+
 #import "AppManager.h"
 #import "AppDelegate.h"
 
@@ -16,6 +17,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+//    [AppManager deleteAllRLMLFolders];
+//    [AppManager deleteMainFolder];
     if(![AppManager isExistMainAppsFolders])
         [AppManager createMainAppsFolders];
     return YES;

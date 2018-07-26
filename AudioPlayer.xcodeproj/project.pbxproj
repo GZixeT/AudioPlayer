@@ -21,6 +21,7 @@
 		863880462100DA9B009F8A66 /* VCSongs.m in Sources */ = {isa = PBXBuildFile; fileRef = 863880452100DA9B009F8A66 /* VCSongs.m */; };
 		8638804A2100DB17009F8A66 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 863880492100DB17009F8A66 /* FileManager.m */; };
 		864AD3732109DA890050A933 /* AnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 864AD3722109DA890050A933 /* AnimationManager.m */; };
+		864AD377210A05620050A933 /* RLMRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 864AD376210A05620050A933 /* RLMRecords.m */; };
 		8652C2DE21085A6C00B5D399 /* TimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652C2DD21085A6C00B5D399 /* TimeManager.m */; };
 		8698297E2100A08900934B9F /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8698297D2100A08900934B9F /* AudioManager.m */; };
 		869829872100B74A00934B9F /* VCAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 869829862100B74A00934B9F /* VCAudioRecorder.m */; };
@@ -86,6 +87,8 @@
 		863880492100DB17009F8A66 /* FileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		864AD3712109DA890050A933 /* AnimationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimationManager.h; sourceTree = "<group>"; };
 		864AD3722109DA890050A933 /* AnimationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnimationManager.m; sourceTree = "<group>"; };
+		864AD375210A05620050A933 /* RLMRecords.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RLMRecords.h; sourceTree = "<group>"; };
+		864AD376210A05620050A933 /* RLMRecords.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RLMRecords.m; sourceTree = "<group>"; };
 		8652C2DC21085A6C00B5D399 /* TimeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeManager.h; sourceTree = "<group>"; };
 		8652C2DD21085A6C00B5D399 /* TimeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeManager.m; sourceTree = "<group>"; };
 		8698297C2100A08900934B9F /* AudioManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
@@ -267,6 +270,15 @@
 			path = AnimationManager;
 			sourceTree = "<group>";
 		};
+		864AD374210A05400050A933 /* RLMRecords */ = {
+			isa = PBXGroup;
+			children = (
+				864AD375210A05620050A933 /* RLMRecords.h */,
+				864AD376210A05620050A933 /* RLMRecords.m */,
+			);
+			path = RLMRecords;
+			sourceTree = "<group>";
+		};
 		8652C2DB21085A1100B5D399 /* TimeManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +357,7 @@
 		86BF31C02105CFE300522FB4 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
+				864AD374210A05400050A933 /* RLMRecords */,
 				86BF31BC2105CC0500522FB4 /* AppManager */,
 				86BF31C12105CFEB00522FB4 /* RLMFolder */,
 			);
@@ -575,6 +588,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				864AD377210A05620050A933 /* RLMRecords.m in Sources */,
 				869829872100B74A00934B9F /* VCAudioRecorder.m in Sources */,
 				86BF31CA21061A5000522FB4 /* VCMenu.m in Sources */,
 				8652C2DE21085A6C00B5D399 /* TimeManager.m in Sources */,

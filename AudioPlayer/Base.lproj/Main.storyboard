@@ -366,8 +366,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jM-nk-tgW">
-                                <rect key="frame" x="139" y="158.5" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="название записи" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jM-nk-tgW">
+                                <rect key="frame" x="92" y="158.5" width="136" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Количество" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ky-8P-dhF">
+                                <rect key="frame" x="113" y="40" width="94" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -375,8 +381,10 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="5Ky-8P-dhF" firstAttribute="top" secondItem="n6V-yH-LEL" secondAttribute="top" constant="20" id="CVg-ER-3Zq"/>
                             <constraint firstItem="QVV-IL-FS4" firstAttribute="top" secondItem="0jM-nk-tgW" secondAttribute="bottom" constant="50" id="Mff-XA-Z7W"/>
                             <constraint firstItem="WMo-e5-mOb" firstAttribute="top" secondItem="QVV-IL-FS4" secondAttribute="bottom" constant="50" id="SBF-y4-nsH"/>
+                            <constraint firstItem="5Ky-8P-dhF" firstAttribute="centerX" secondItem="76T-vU-KcN" secondAttribute="centerX" id="cjL-G9-c1b"/>
                             <constraint firstItem="0jM-nk-tgW" firstAttribute="centerX" secondItem="76T-vU-KcN" secondAttribute="centerX" id="lTO-uZ-fb1"/>
                             <constraint firstItem="QVV-IL-FS4" firstAttribute="centerX" secondItem="76T-vU-KcN" secondAttribute="centerX" id="nqP-hs-orE"/>
                             <constraint firstItem="WMo-e5-mOb" firstAttribute="centerX" secondItem="76T-vU-KcN" secondAttribute="centerX" id="oLD-WC-kNc"/>
@@ -387,6 +395,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="bRec" destination="WMo-e5-mOb" id="VxF-in-JCK"/>
+                        <outlet property="lbCounter" destination="5Ky-8P-dhF" id="IaZ-TD-9g7"/>
                         <outlet property="lbRecTime" destination="QVV-IL-FS4" id="5gr-4w-Zf1"/>
                         <outlet property="lbRecordName" destination="0jM-nk-tgW" id="BQU-Wg-169"/>
                     </connections>

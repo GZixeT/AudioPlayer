@@ -12,9 +12,11 @@
 + (BOOL) isExistMainAppsFolders;
 + (void) createMainAppsFolders;
 + (void) addObjectForRealm:(id)object;
++ (void) deleteObjectForRealm:(id)object;
 + (void) deleteAllRLMLFolders;
 + (void) deleteMainFolder;
 + (NSString*) mainAppFolder;
 + (NSString*) standartRecordFolder;
 + (NSString*) documentsFolder;
++ (NSString*) recordsBasicPath;
 @end

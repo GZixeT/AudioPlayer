@@ -7,6 +7,7 @@
 //
 #define MAIN_APP_FOLDER_NAME @"AudioPlayerGZ"
 #define STANDRT_RECORD_FOLDER_NAME @"records"
+#define STANDART_RECORD_BASIC_PATH [NSString stringWithFormat:@"%@/%@",MAIN_APP_FOLDER_NAME,STANDRT_RECORD_FOLDER_NAME]
 #define DOCUMENTS_FOLDER [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 #define MAIN_APP_FOLDER [DOCUMENTS_FOLDER stringByAppendingPathComponent:MAIN_APP_FOLDER_NAME]
 #define STANDRT_RECORD_FOLDER [MAIN_APP_FOLDER stringByAppendingPathComponent:STANDRT_RECORD_FOLDER_NAME]
@@ -18,20 +19,20 @@
 
 @implementation AppManager
 + (BOOL) isExistMainAppsFolders {
-    return [RLMFolder allObjects].count;
+    return [RLMFolder objectForPrimaryKey:MAIN_APP_FOLDER_NAME] && [RLMFolder objectForPrimaryKey:STANDART_RECORD_BASIC_PATH];
 }
 + (void) createMainAppsFolders {
     NSError *mainError = nil;
     NSError *recordsError = nil;
     [FileManager createDirectoryAtPath:[self mainAppFolder] error:&mainError];
     if(!mainError) {
-        RLMFolder *main = [RLMFolder createRLMFolder:[self mainAppFolder]];
+        RLMFolder *main = [RLMFolder createRLMFolder:MAIN_APP_FOLDER_NAME];
         [self addObjectForRealm:main];
     }
     else NSLog(@"%@ error:%@",MAIN_APP_FOLDER,mainError);
     [FileManager createDirectoryAtPath:STANDRT_RECORD_FOLDER error:&recordsError];
     if(!recordsError) {
-        RLMFolder *records = [RLMFolder createRLMFolder:STANDRT_RECORD_FOLDER];
+        RLMFolder *records = [RLMFolder createRLMFolder:STANDART_RECORD_BASIC_PATH];
         [self addObjectForRealm:records];
     }
     else NSLog(@"%@ error:%@",STANDRT_RECORD_FOLDER,recordsError);
@@ -40,6 +41,12 @@
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
     [realm addOrUpdateObject:object];
+    [realm commitWriteTransaction];
+}
++ (void) deleteObjectForRealm:(id)object {
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    [realm deleteObject:object];
     [realm commitWriteTransaction];
 }
 + (NSString*) mainAppFolder {
@@ -53,7 +60,7 @@
     RLMResults *result = [RLMFolder allObjects];
     for(RLMFolder *folder in result) {
         NSError *error = nil;
-        [FileManager removeItemAtPath:folder.folderName error:&error];
+        [FileManager removeItemAtPath:[NSString stringWithFormat:@"%@/%@",DOCUMENTS_FOLDER,folder.folderName] error:&error];
     }
     [realm beginWriteTransaction];
     [realm deleteObjects:result];
@@ -65,5 +72,8 @@
 }
 + (NSString*) documentsFolder {
     return DOCUMENTS_FOLDER;
+}
++ (NSString*) recordsBasicPath {
+    return STANDART_RECORD_BASIC_PATH;
 }
 @end

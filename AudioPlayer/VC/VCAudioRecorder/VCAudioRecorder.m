@@ -9,19 +9,21 @@
 #import "VCAudioRecorder.h"
 #import "AudioManager.h"
 #import "AlertManager.h"
-#import "AudioPlayer.h"
 #import "FileManager.h"
 #import "AppManager.h"
 #import "VCRecords.h"
 #import "TimeManager.h"
+#import "RLMRecords.h"
+#import <Realm.h>
 
 @interface VCAudioRecorder ()
+@property (weak, nonatomic) IBOutlet UILabel *lbCounter;
 @property AVAudioRecorder *recorder;
-@property AudioPlayer *manager;
 @property NSTimer *timerRecord;
 @property NSInteger count;
 @property NSString *recordPath;
 @property TimeManager *timeManager;
+@property RLMNotificationToken *nihao;
 @end
 
 @implementation VCAudioRecorder
@@ -30,7 +32,6 @@
     [super viewDidLoad];
     self.timerRecord = nil;
     self.timeManager = [TimeManager sharedInstance];
-    self.manager = [AudioPlayer sharedInstance];
     self.navigationItem.title = @"Диктофон";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Записи" style:UIBarButtonItemStylePlain target:self action:@selector(goToRecords)];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
@@ -39,6 +40,7 @@
     self.bRec.layer.borderWidth = 2.f;
     [self setTime];
     [self setRecordPath];
+    self.lbCounter.text = [NSString stringWithFormat:@"Количество записей: %d",(int)[RLMRecords allObjects].count];
 }
 - (void) setRecordPath {
     self.count = [FileManager getFileNamesWithPath:[AppManager standartRecordFolder]].count;
@@ -61,12 +63,13 @@
     [self setTime];
     if(!self.recorder.isRecording) {
         [AudioManager setSessionCategoryForRecordAndPlayWithError:nil];
-        self.recordPath = [NSString stringWithFormat:@"%@/record_%d.caf",[AppManager standartRecordFolder],(int)self.count];
+        self.recordPath = [NSString stringWithFormat:@"%@/record_%d(%d).caf",[AppManager standartRecordFolder],(int)self.count,(int)[RLMRecords allObjects].count];
         NSError *error = nil;
         self.recorder = [AudioManager createAudioRecorderWithFilePath:self.recordPath error:&error];
         if(!error) {
             [self.recorder record];
             [self.bRec setTitle:@"Stop" forState:(UIControlStateNormal)];
+            [AppManager addObjectForRealm:[RLMRecords createRLMRecords:[NSString stringWithFormat:@"%@/record_%d(%d).caf",[AppManager recordsBasicPath],(int)self.count,(int)[RLMRecords allObjects].count]]];
             self.timerRecord = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(recordProgress) userInfo:nil repeats:YES];
         } else [AlertManager alertWithTitle:@"Ошибка" message:@"Ошибка создания файла"];
     } else {
@@ -86,5 +89,18 @@
         [self.timerRecord invalidate];
         self.timerRecord = nil;
     }
+}
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.lbCounter.text = [NSString stringWithFormat:@"Количество записей: %d",(int)[RLMRecords allObjects].count];
+    self.nihao = [[RLMRecords allObjects] addNotificationBlock:^(RLMResults * _Nullable results, RLMCollectionChange * _Nullable change, NSError * _Nullable error) {
+        if(change) {
+           self.lbCounter.text = [NSString stringWithFormat:@"Количество записей: %d",(int)[RLMRecords allObjects].count];
+        }
+    }];
+}
+- (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.nihao invalidate];
 }
 @end
