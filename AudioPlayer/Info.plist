@@ -24,8 +24,8 @@
 	<string>музыку хочу</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>USE YOUR MICROPHPNE</string>
-    <key>NSAppleMusicUsageDescription</key>
-    <string>USE MUSIC</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Для проигрывания музыки</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

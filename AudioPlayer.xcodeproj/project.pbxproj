@@ -20,6 +20,7 @@
 		8616D58F210748DC00AC40FE /* STCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8616D58E210748DC00AC40FE /* STCell.m */; };
 		863880462100DA9B009F8A66 /* VCSongs.m in Sources */ = {isa = PBXBuildFile; fileRef = 863880452100DA9B009F8A66 /* VCSongs.m */; };
 		8638804A2100DB17009F8A66 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 863880492100DB17009F8A66 /* FileManager.m */; };
+		864AD3732109DA890050A933 /* AnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 864AD3722109DA890050A933 /* AnimationManager.m */; };
 		8652C2DE21085A6C00B5D399 /* TimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652C2DD21085A6C00B5D399 /* TimeManager.m */; };
 		8698297E2100A08900934B9F /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8698297D2100A08900934B9F /* AudioManager.m */; };
 		869829872100B74A00934B9F /* VCAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 869829862100B74A00934B9F /* VCAudioRecorder.m */; };
@@ -83,6 +84,8 @@
 		863880452100DA9B009F8A66 /* VCSongs.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCSongs.m; sourceTree = "<group>"; };
 		863880482100DB17009F8A66 /* FileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
 		863880492100DB17009F8A66 /* FileManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
+		864AD3712109DA890050A933 /* AnimationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimationManager.h; sourceTree = "<group>"; };
+		864AD3722109DA890050A933 /* AnimationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnimationManager.m; sourceTree = "<group>"; };
 		8652C2DC21085A6C00B5D399 /* TimeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeManager.h; sourceTree = "<group>"; };
 		8652C2DD21085A6C00B5D399 /* TimeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeManager.m; sourceTree = "<group>"; };
 		8698297C2100A08900934B9F /* AudioManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
@@ -171,6 +174,7 @@
 		860D6BAA210080A700D05F7F /* AudioPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				864AD3702109DA670050A933 /* AnimationManager */,
 				8652C2DB21085A1100B5D399 /* TimeManager */,
 				86BF31C02105CFE300522FB4 /* Realm */,
 				869959CC210209280062029F /* AudioPlayer */,
@@ -252,6 +256,15 @@
 				863880492100DB17009F8A66 /* FileManager.m */,
 			);
 			path = FileManager;
+			sourceTree = "<group>";
+		};
+		864AD3702109DA670050A933 /* AnimationManager */ = {
+			isa = PBXGroup;
+			children = (
+				864AD3712109DA890050A933 /* AnimationManager.h */,
+				864AD3722109DA890050A933 /* AnimationManager.m */,
+			);
+			path = AnimationManager;
 			sourceTree = "<group>";
 		};
 		8652C2DB21085A1100B5D399 /* TimeManager */ = {
@@ -571,6 +584,7 @@
 				8638804A2100DB17009F8A66 /* FileManager.m in Sources */,
 				8698298C2100CBF900934B9F /* AlertManager.m in Sources */,
 				860D6BBB210080AA00D05F7F /* main.m in Sources */,
+				864AD3732109DA890050A933 /* AnimationManager.m in Sources */,
 				8616D58F210748DC00AC40FE /* STCell.m in Sources */,
 				8616D58B21073D4C00AC40FE /* RTCell.m in Sources */,
 				8698297E2100A08900934B9F /* AudioManager.m in Sources */,

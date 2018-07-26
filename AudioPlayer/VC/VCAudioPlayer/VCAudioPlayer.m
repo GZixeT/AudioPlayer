@@ -11,15 +11,17 @@
 #import "VCAudioRecorder.h"
 #import "AudioPlayer.h"
 #import "TimeManager.h"
+#import "AnimationManager.h"
 
-@interface VCAudioPlayer ()
+@interface VCAudioPlayer () <UIGestureRecognizerDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *bPlace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bProgressWidthConstraint;
 @property TimeManager *timeManager;
 @property AudioPlayer *audioPlayer;
 @property NSTimer *trackTimer;
 @end
 
 @implementation VCAudioPlayer
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.timeManager = [TimeManager sharedInstance];
@@ -42,16 +44,39 @@
     self.artworkImageView.clipsToBounds = YES;
     self.artworkImageView.layer.borderWidth = 3.f;
     self.artworkImageView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.bPlace.layer.cornerRadius = 15;
+    self.bProgress.layer.cornerRadius = 15;
     if(self.audioPlayer.artwork){
         [self.artworkImageView setImage:self.audioPlayer.artwork];
     } else {
         self.artworkImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.artworkImageView setImage:[UIImage imageNamed:@"musical-note"]];
     }
+    [self.bPlace addTarget:self action:@selector(setTimeAfterDrag:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+    [self.bProgress  addTarget:self action:@selector(setTimeAfterDrag:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+    [self.bPlace addTarget:self action:@selector(bDragMove:withEvent:) forControlEvents:UIControlEventTouchDragInside];
+    [self.bProgress  addTarget:self action:@selector(bDragMove:withEvent:) forControlEvents:UIControlEventTouchDragInside];
     [self setTime];
+}
+- (void) bDragMove:(id)sender withEvent:(UIEvent*)event {
+    [self.trackTimer invalidate];
+    self.trackTimer = nil;
+    CGPoint point = [[[event allTouches] anyObject] locationInView:self.bPlace];
+    if(point.x > self.bPlace.frame.size.width)
+        point.x = self.bPlace.frame.size.width;
+    [AnimationManager constraintMoveAnimationWithView:self.bPlace constraint:self.bProgressWidthConstraint duration:0 constraintPosition:point.x];
+    NSTimeInterval time = self.bProgressWidthConstraint.constant/self.bPlace.frame.size.width * self.audioPlayer.audioPlayer.duration;
+    self.lbTimeLeft.text = [self.timeManager dateFormatSecondsToMinutes:time];
+}
+- (void) setTimeAfterDrag:(id)sender withEvent:(UIEvent*)event {
+    NSTimeInterval time = self.bProgressWidthConstraint.constant/self.bPlace.frame.size.width * self.audioPlayer.audioPlayer.duration;
+    [self.audioPlayer.audioPlayer setCurrentTime:time];
+    if(!self.trackTimer)
+        self.trackTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(trackProgress) userInfo:nil repeats:YES];
 }
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self trackProgress];
 }
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -75,9 +100,9 @@
     }
 }
 - (void) trackProgress {
-    float multiplier = [self.audioPlayer.audioPlayer currentTime]/[self.audioPlayer.audioPlayer duration];
+    float multiplier = ([self.audioPlayer.audioPlayer currentTime]/[self.audioPlayer.audioPlayer duration]) * self.bPlace.frame.size.width;
+    [AnimationManager constraintMoveAnimationWithView:self.bPlace constraint:self.bProgressWidthConstraint duration:0 constraintPosition:multiplier];
     [self setTime];
-    self.pbAudioTrack.progress = multiplier;
     if(!self.audioPlayer.audioPlayer.isPlaying){
         [self.trackTimer invalidate];
         self.trackTimer = nil;
