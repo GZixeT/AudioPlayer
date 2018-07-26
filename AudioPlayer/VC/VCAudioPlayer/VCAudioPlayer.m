@@ -12,6 +12,7 @@
 #import "AudioPlayer.h"
 #import "TimeManager.h"
 #import "AnimationManager.h"
+#import "LandscapeManager.h"
 
 @interface VCAudioPlayer () <UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *bPlace;
@@ -74,13 +75,6 @@
     if(!self.trackTimer)
         self.trackTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(trackProgress) userInfo:nil repeats:YES];
 }
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self trackProgress];
-}
-- (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -112,5 +106,20 @@
 - (void) setTime {
     self.lbTimeLeft.text = [self.timeManager dateFormatSecondsToMinutes:[self.audioPlayer.audioPlayer currentTime]];
     self.lbTimeRight.text = [self.timeManager dateFormatSecondsToMinutes:[self.audioPlayer.audioPlayer duration]];
+}
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context){
+        [LandscapeManager toLandscapeVC:self];
+    }completion:^(id<UIViewControllerTransitionCoordinatorContext> context){
+    }];
+}
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self trackProgress];
+    [LandscapeManager toLandscapeVC:self];
+}
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 @end

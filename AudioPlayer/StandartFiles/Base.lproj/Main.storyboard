@@ -140,6 +140,7 @@
                         <outlet property="bPlay" destination="nJo-Tt-FI7" id="GfM-wJ-HKU"/>
                         <outlet property="lbArtistName" destination="ZYU-uY-qfF" id="8Rf-xt-ol6"/>
                         <outlet property="lbSongName" destination="qdR-QB-q0J" id="rme-xh-SoI"/>
+                        <outlet property="vContainer" destination="S4f-kY-356" id="ei8-aA-78a"/>
                         <outlet property="vGradient" destination="VG2-Ob-pUv" id="f2p-Us-UhF"/>
                     </connections>
                 </viewController>
@@ -403,6 +404,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HPg-Hs-wqd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-387" y="1577"/>
+        </scene>
+        <!--Lanscape-->
+        <scene sceneID="ddw-gy-usH">
+            <objects>
+                <viewController storyboardIdentifier="VCLandscape" id="zzu-Ku-sqS" customClass="VCLanscape" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uP1-hc-vgi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Экран еще не готов" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4C-Ue-dTD">
+                                <rect key="frame" x="81" y="229.5" width="158.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="R4C-Ue-dTD" firstAttribute="centerX" secondItem="uP1-hc-vgi" secondAttribute="centerX" id="AfD-v4-8fn"/>
+                            <constraint firstItem="R4C-Ue-dTD" firstAttribute="centerY" secondItem="uP1-hc-vgi" secondAttribute="centerY" id="IlX-91-phB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jPr-FC-E5y"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yvf-JR-XJH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="490" y="846"/>
         </scene>
         <!--Records-->
         <scene sceneID="FcZ-zd-gwJ">

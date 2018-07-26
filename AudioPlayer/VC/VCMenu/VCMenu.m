@@ -9,8 +9,11 @@
 #import "VCAudioRecorder.h"
 #import "VCSongs.h"
 #import "AudioPlayer.h"
+#import "VCAudioPlayer.h"
+#import "LandscapeManager.h"
 @interface VCMenu ()
 @property CAGradientLayer *gradient;
+@property BOOL isLockLanscape;
 @end
 
 @implementation VCMenu
@@ -23,9 +26,17 @@
     self.bPlay.layer.cornerRadius = self.bPlay.frame.size.width/2;
     self.bPlay.layer.borderWidth = 2.f;
     self.bPlay.layer.borderColor = [UIColor blackColor].CGColor;
+    //UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self.vContainer action:@selector(goToRecord)];
+    //[self.artworkImage addGestureRecognizer:tap];
+    //[self.vContainer addGestureRecognizer:tap];
     [self setGradient];
     [self setImage];
 }
+//- (void) tapToImage {
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    VCAudioPlayer *player = [storyboard instantiateViewControllerWithIdentifier:@"AudioPlayer"];
+//    [self.navigationController pushViewController:player animated:YES];
+//}
 - (void) goToRecord {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     VCAudioRecorder *recordView = [storyboard instantiateViewControllerWithIdentifier:@"AudioRecorder"];
@@ -38,14 +49,19 @@
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context){
+        if(!self.isLockLanscape)
+            [LandscapeManager toLandscapeVC:self];
         self.gradient.frame = self.vGradient.bounds;
     }completion:^(id<UIViewControllerTransitionCoordinatorContext> context){
-        
     }];
 }
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.gradient.frame = self.vGradient.bounds;
+}
+- (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.isLockLanscape = YES;
 }
 - (void) setImage {
     if([AudioPlayer sharedInstance].artwork) {
@@ -66,6 +82,8 @@
 }
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.isLockLanscape = NO;
+    [LandscapeManager toLandscapeVC:self];
     if(![AudioPlayer sharedInstance].audioPlayer){
         self.bPlay.hidden = YES;
         self.lbSongName.text = @"";
