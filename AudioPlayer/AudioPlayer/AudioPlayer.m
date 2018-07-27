@@ -5,8 +5,9 @@
 //  Created by Георгий Зубков on 20/07/2018.
 //  Copyright © 2018 Георгий Зубков. All rights reserved.
 //
-
 #import "AudioPlayer.h"
+@interface AudioPlayer()
+@end
 
 static AudioPlayer *sharedInstance = nil;
 @implementation AudioPlayer

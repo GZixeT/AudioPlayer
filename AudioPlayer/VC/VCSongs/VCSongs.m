@@ -16,6 +16,7 @@
 #import "STCell.h"
 #import "AnimationManager.h"
 #import "AudioPlayer.h"
+#import "LandscapeManager.h"
 
 @interface VCSongs () <UITableViewDelegate, UITableViewDataSource, STCellDelegate>
 @property NSArray *songs;
@@ -56,6 +57,7 @@
 - (void) goToViewController {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     VCAudioPlayer *audioPlayer = [storyboard instantiateViewControllerWithIdentifier:@"AudioPlayer"];
+    audioPlayer.playType = PlayTypeAll;
     [self.navigationController pushViewController:audioPlayer animated:YES];
 }
 - (void)didReceiveMemoryWarning {
@@ -72,6 +74,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.songs.count;
 }
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context){
+        [LandscapeManager toLandscapeVC:self];
+    }completion:^(id<UIViewControllerTransitionCoordinatorContext> context){
+    }];
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     STCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_ID forIndexPath:indexPath];
     MPMediaItem *item = self.songs[indexPath.row];
@@ -80,6 +89,7 @@
     cell.lbArtistName.text = item.artist;
     cell.pathOrURL = item.assetURL;
     cell.artwork = [item.artwork imageWithSize:item.artwork.imageCropRect.size];
+    cell.indexPath = indexPath;
     self.tableSongs.rowHeight = 70;
     return cell;
 }

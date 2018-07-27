@@ -12,7 +12,9 @@
 + (BOOL) isExistMainAppsFolders;
 + (void) createMainAppsFolders;
 + (void) addObjectForRealm:(id)object;
++ (void) addObjectsForRealm:(id)objects;
 + (void) deleteObjectForRealm:(id)object;
++ (void) deleteObjectsForRealm:(id)objects;
 + (void) deleteAllRLMLFolders;
 + (void) deleteMainFolder;
 + (NSString*) mainAppFolder;

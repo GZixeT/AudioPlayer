@@ -272,7 +272,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-388" y="823.53823088455783"/>
+            <point key="canvasLocation" x="1108" y="58"/>
         </scene>
         <!--Songs-->
         <scene sceneID="3in-H3-twf">
@@ -404,7 +404,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HPg-Hs-wqd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-387" y="1577"/>
+            <point key="canvasLocation" x="-388" y="1545"/>
         </scene>
         <!--Lanscape-->
         <scene sceneID="ddw-gy-usH">
@@ -431,7 +431,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yvf-JR-XJH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="490" y="846"/>
+            <point key="canvasLocation" x="349" y="800"/>
         </scene>
         <!--Records-->
         <scene sceneID="FcZ-zd-gwJ">
@@ -486,7 +486,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6p3-LW-4wJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="490" y="1576"/>
+            <point key="canvasLocation" x="480" y="1545"/>
         </scene>
     </scenes>
 </document>

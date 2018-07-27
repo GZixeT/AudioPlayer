@@ -13,8 +13,9 @@
 #import "TimeManager.h"
 #import "AnimationManager.h"
 #import "LandscapeManager.h"
+#import <MediaPlayer/MediaPlayer.h>
 
-@interface VCAudioPlayer () <UIGestureRecognizerDelegate>
+@interface VCAudioPlayer () <UIGestureRecognizerDelegate,AVAudioPlayerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *bPlace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bProgressWidthConstraint;
 @property TimeManager *timeManager;
@@ -33,6 +34,7 @@
     self.timeManager = [TimeManager sharedInstance];
     self.audioPlayer = [AudioPlayer sharedInstance];
     self.trackTimer = nil;
+    self.audioPlayer.audioPlayer.delegate =self;
     self.navigationItem.title = @"Плеер";
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
     if(self.audioPlayer.audioPlayer.isPlaying) {
@@ -122,11 +124,6 @@
     float multiplier = ([self.audioPlayer.audioPlayer currentTime]/[self.audioPlayer.audioPlayer duration]) * self.bPlace.frame.size.width;
     [AnimationManager constraintMoveAnimationWithView:self.bPlace constraint:self.bProgressWidthConstraint duration:0 constraintPosition:multiplier];
     [self setTime];
-    if(!self.audioPlayer.audioPlayer.isPlaying){
-        [self.trackTimer invalidate];
-        self.trackTimer = nil;
-        [self.bPlay setTitle:@"Play" forState:(UIControlStateNormal)];
-    }
 }
 - (void) setTime {
     self.lbTimeLeft.text = [self.timeManager dateFormatSecondsToMinutes:[self.audioPlayer.audioPlayer currentTime]];
@@ -149,6 +146,32 @@
 }
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    //[self dismissModalViewControllerAnimated:NO];
+}
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    MPMediaItem *item = nil;
+    self.audioPlayer.playlistPosition++;
+    switch (self.playType) {
+        case PlayTypeAll:
+            item = [MPMediaQuery songsQuery].items[self.audioPlayer.playlistPosition];
+            break;
+        case PlayTypeSingle:
+            break;
+        case PlayTypePlayList:
+            break;
+        default:
+            break;
+    }
+    self.audioPlayer.audioPlayer = [AudioManager createAudioPlayerWithURL:item.assetURL error:nil];
+    if(item.artist)
+        self.lbArtistAndSong.text = [NSString stringWithFormat:@"%@ - %@",item.artist, item.title];
+    else self.lbArtistAndSong.text = [NSString stringWithFormat:@"%@ - %@",@"Неизвестный исполнитель", item.title];
+    if(item.artwork){
+        [self.artworkImageView setImage:[item.artwork imageWithSize:[item.artwork imageCropRect].size]];
+    } else {
+        self.artworkImageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.artworkImageView setImage:[UIImage imageNamed:@"musical-note"]];
+    }
+    [self.audioPlayer.audioPlayer play];
+    
 }
 @end

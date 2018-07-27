@@ -15,9 +15,11 @@
 @property UIImage *artwork;
 @property id <STCellDelegate> delegate;
 @property id pathOrURL;
+@property NSIndexPath *indexPath;
 @end
 
 @protocol STCellDelegate
 @optional
 - (void) goToViewController;
+- (void) goToViewControllerWithPosition:(NSInteger)position;
 @end

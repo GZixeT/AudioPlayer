@@ -8,6 +8,7 @@
 
 #import "AppManager.h"
 #import "AppDelegate.h"
+#import <Realm.h>
 
 @interface AppDelegate ()
 
@@ -15,10 +16,30 @@
 
 @implementation AppDelegate
 
-
+- (void) realMigration {
+    RLMRealmConfiguration *config = [RLMRealmConfiguration defaultConfiguration];
+    // Set the new schema version. This must be greater than the previously used
+    // version (if you've never set a schema version before, the version is 0).
+    // Set the block which will be called automatically when opening a Realm with a
+    // schema version lower than the one set above
+    config.migrationBlock = ^(RLMMigration *migration, uint64_t oldSchemaVersion) {
+        // We haven’t migrated anything yet, so oldSchemaVersion == 0
+        if (oldSchemaVersion <= config.schemaVersion) {
+            
+        }
+    };
+    config.schemaVersion = 2;
+    // Tell Realm to use this new configuration object for the default Realm
+    [RLMRealmConfiguration setDefaultConfiguration:config];
+    
+    // Now that we've told Realm how to handle the schema change, opening the file
+    // will automatically perform the migration
+    //[RLMRealm defaultRealm];
+}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 //    [AppManager deleteAllRLMLFolders];
 //    [AppManager deleteMainFolder];
+    [self realMigration];
     if(![AppManager isExistMainAppsFolders])
         [AppManager createMainAppsFolders];
     return YES;

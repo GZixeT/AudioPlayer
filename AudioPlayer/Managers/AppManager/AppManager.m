@@ -43,10 +43,22 @@
     [realm addOrUpdateObject:object];
     [realm commitWriteTransaction];
 }
++ (void) addObjectsForRealm:(id)objects {
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    [realm addOrUpdateObjects:objects];
+    [realm commitWriteTransaction];
+}
 + (void) deleteObjectForRealm:(id)object {
     RLMRealm *realm = [RLMRealm defaultRealm];
     [realm beginWriteTransaction];
     [realm deleteObject:object];
+    [realm commitWriteTransaction];
+}
++ (void) deleteObjectsForRealm:(id)objects {
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    [realm beginWriteTransaction];
+    [realm deleteObjects:objects];
     [realm commitWriteTransaction];
 }
 + (NSString*) mainAppFolder {

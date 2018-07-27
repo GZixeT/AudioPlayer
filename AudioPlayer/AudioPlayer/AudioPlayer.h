@@ -14,6 +14,7 @@
 @property UIImage *artwork;
 @property NSString *title;
 @property NSString *artist;
+@property NSInteger playlistPosition;
 + (instancetype) sharedInstance;
 - (void) setAudioPlayer:(AVAudioPlayer *)audioPlayer;
 - (AVAudioPlayer*) audioPlayer;

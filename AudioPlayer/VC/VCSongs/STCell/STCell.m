@@ -37,6 +37,7 @@
     [AudioPlayer sharedInstance].title = self.lbSongsName.text;
     [AudioPlayer sharedInstance].artist = self.lbArtistName.text;
     [AudioPlayer sharedInstance].artwork = self.artwork;
+    [AudioPlayer sharedInstance].playlistPosition = self.indexPath.row;
     [[AudioPlayer sharedInstance].audioPlayer play];
     [self.delegate goToViewController];
 }
