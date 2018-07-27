@@ -11,6 +11,7 @@
 #import "AudioPlayer.h"
 #import "VCAudioPlayer.h"
 #import "LandscapeManager.h"
+#import "AnimationManager.h"
 @interface VCMenu ()
 @property CAGradientLayer *gradient;
 @property BOOL isLockLanscape;
@@ -26,14 +27,30 @@
     self.bPlay.layer.cornerRadius = self.bPlay.frame.size.width/2;
     self.bPlay.layer.borderWidth = 2.f;
     self.bPlay.layer.borderColor = [UIColor blackColor].CGColor;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]init];
-    [tap addTarget:self action:@selector(tapToViewContaiener)];
-    //[self.artworkImage addGestureRecognizer:tap];
-    [self.vContainer addGestureRecognizer:tap];
+    [self initViewGestures];
     [self setGradient];
     [self setImage];
 }
-- (void) tapToViewContaiener {
+- (void) initViewGestures {
+    UISwipeGestureRecognizer *swipeL = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft)];
+    UISwipeGestureRecognizer *swipeR = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight)];
+    swipeL.direction = UISwipeGestureRecognizerDirectionLeft;
+    swipeR.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.vContainer addGestureRecognizer:swipeL];
+    [self.vContainer addGestureRecognizer:swipeR];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]init];
+    [tap addTarget:self action:@selector(changeViewForGestures)];
+    [self.vContainer addGestureRecognizer:tap];
+}
+- (void) swipeLeft {
+    [self changeViewForGestures];
+    [self.view.window.layer addAnimation:[AnimationManager transitionAnimationBeforViewDisappearWithType:GesturesAnimationSwipeRight] forKey:nil];
+}
+- (void) swipeRight {
+    [self goToVCSongs];
+    [self.view.window.layer addAnimation:[AnimationManager transitionAnimationBeforViewDisappearWithType:GesturesAnimationSwipeLeft] forKey:nil];
+}
+- (void) changeViewForGestures {
     if([AudioPlayer sharedInstance].audioPlayer) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         VCAudioPlayer *player = [storyboard instantiateViewControllerWithIdentifier:@"AudioPlayer"];

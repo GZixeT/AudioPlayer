@@ -41,7 +41,9 @@
             self.trackTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(trackProgress) userInfo:nil repeats:YES];
     }
     else [self.bPlay setTitle:@"Play" forState:(UIControlStateNormal)];
-    self.lbArtistAndSong.text = [NSString stringWithFormat:@"%@ - %@",self.audioPlayer.artist, self.audioPlayer.title];
+    if(self.audioPlayer.artist)
+        self.lbArtistAndSong.text = [NSString stringWithFormat:@"%@ - %@",self.audioPlayer.artist, self.audioPlayer.title];
+    else self.lbArtistAndSong.text = [NSString stringWithFormat:@"%@ - %@",@"Неизвестный исполнитель", self.audioPlayer.title];
     [AudioManager setSessionCategoryForMultiRouteWithError:nil];
     self.bPlay.layer.cornerRadius = self.bPlay.frame.size.width/2;
     self.bPlay.layer.borderWidth = 2.f;
@@ -76,12 +78,7 @@
 }
 - (void) swipeLeft {
     [self.navigationController popToRootViewControllerAnimated:YES];
-    CATransition *transition = [CATransition animation];
-    transition.duration = 0.3;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionPush;
-    transition.subtype = kCATransitionFromRight;
-    [self.view.window.layer addAnimation:transition forKey:nil];
+    [self.view.window.layer addAnimation:[AnimationManager transitionAnimationBeforViewDisappearWithType:GesturesAnimationSwipeRight] forKey:nil];
 }
 - (void) swipeRight {
     NSInteger last = [[self.navigationController viewControllers] indexOfObject:self];

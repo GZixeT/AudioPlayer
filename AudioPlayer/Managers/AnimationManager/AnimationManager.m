@@ -19,4 +19,21 @@
     [view layoutIfNeeded];
     [CATransaction commit];
 }
++ (CATransition*) transitionAnimationBeforViewDisappearWithType:(GesturesAnimation)animation {
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.3;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionPush;
+    switch (animation) {
+        case GesturesAnimationSwipeLeft:
+            transition.subtype = kCATransitionFromLeft;
+            break;
+        case GesturesAnimationSwipeRight:
+            transition.subtype = kCATransitionFromRight;
+            break;
+        default:
+            break;
+    }
+    return transition;
+}
 @end

@@ -14,6 +14,8 @@
 #import "VCAudioPlayer.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "STCell.h"
+#import "AnimationManager.h"
+#import "AudioPlayer.h"
 
 @interface VCSongs () <UITableViewDelegate, UITableViewDataSource, STCellDelegate>
 @property NSArray *songs;
@@ -30,7 +32,26 @@
     self.tableSongs.delegate = self;
     self.tableSongs.tableFooterView = [[UIView alloc]init];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
+    [self initViewGestures];
     // Do any additional setup after loading the view.
+}
+- (void) initViewGestures {
+    UISwipeGestureRecognizer *swipeL = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft)];
+    UISwipeGestureRecognizer *swipeR = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight)];
+    swipeL.direction = UISwipeGestureRecognizerDirectionLeft;
+    swipeR.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swipeL];
+    [self.view addGestureRecognizer:swipeR];
+}
+- (void) swipeLeft {
+    if([AudioPlayer sharedInstance].audioPlayer)
+        [self goToViewController];
+    else [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.view.window.layer addAnimation:[AnimationManager transitionAnimationBeforViewDisappearWithType:GesturesAnimationSwipeRight] forKey:nil];
+}
+- (void) swipeRight {
+    NSInteger last = [[self.navigationController viewControllers] indexOfObject:self];
+    [self.navigationController popToViewController:[[self.navigationController viewControllers]objectAtIndex:last - 1] animated:YES];
 }
 - (void) goToViewController {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

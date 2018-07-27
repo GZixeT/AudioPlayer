@@ -7,6 +7,12 @@
 //
 #import <UIKit/UIKit.h>
 
+typedef enum{
+    GesturesAnimationSwipeLeft,
+    GesturesAnimationSwipeRight
+}GesturesAnimation;
+
 @interface AnimationManager : NSObject
 + (void) constraintMoveAnimationWithView:(UIView*)view constraint:(NSLayoutConstraint*)constraint duration:(double)duration constraintPosition:(CGFloat)position;
++ (CATransition*) transitionAnimationBeforViewDisappearWithType:(GesturesAnimation)animation;
 @end
