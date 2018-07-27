@@ -26,17 +26,20 @@
     self.bPlay.layer.cornerRadius = self.bPlay.frame.size.width/2;
     self.bPlay.layer.borderWidth = 2.f;
     self.bPlay.layer.borderColor = [UIColor blackColor].CGColor;
-    //UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self.vContainer action:@selector(goToRecord)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]init];
+    [tap addTarget:self action:@selector(tapToViewContaiener)];
     //[self.artworkImage addGestureRecognizer:tap];
-    //[self.vContainer addGestureRecognizer:tap];
+    [self.vContainer addGestureRecognizer:tap];
     [self setGradient];
     [self setImage];
 }
-//- (void) tapToImage {
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    VCAudioPlayer *player = [storyboard instantiateViewControllerWithIdentifier:@"AudioPlayer"];
-//    [self.navigationController pushViewController:player animated:YES];
-//}
+- (void) tapToViewContaiener {
+    if([AudioPlayer sharedInstance].audioPlayer) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        VCAudioPlayer *player = [storyboard instantiateViewControllerWithIdentifier:@"AudioPlayer"];
+        [self.navigationController pushViewController:player animated:YES];
+    } else [self goToVCSongs];
+}
 - (void) goToRecord {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     VCAudioRecorder *recordView = [storyboard instantiateViewControllerWithIdentifier:@"AudioRecorder"];

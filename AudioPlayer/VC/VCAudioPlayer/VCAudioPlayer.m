@@ -25,6 +25,11 @@
 @implementation VCAudioPlayer
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initViewParams];
+    [self initViewGestures];
+    [self initProgressEvents];
+}
+- (void) initViewParams {
     self.timeManager = [TimeManager sharedInstance];
     self.audioPlayer = [AudioPlayer sharedInstance];
     self.trackTimer = nil;
@@ -53,11 +58,34 @@
         self.artworkImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.artworkImageView setImage:[UIImage imageNamed:@"musical-note"]];
     }
+    [self setTime];
+}
+- (void) initProgressEvents {
     [self.bPlace addTarget:self action:@selector(setTimeAfterDrag:withEvent:) forControlEvents:UIControlEventTouchUpInside];
     [self.bProgress  addTarget:self action:@selector(setTimeAfterDrag:withEvent:) forControlEvents:UIControlEventTouchUpInside];
     [self.bPlace addTarget:self action:@selector(bDragMove:withEvent:) forControlEvents:UIControlEventTouchDragInside];
     [self.bProgress  addTarget:self action:@selector(bDragMove:withEvent:) forControlEvents:UIControlEventTouchDragInside];
-    [self setTime];
+}
+- (void) initViewGestures {
+    UISwipeGestureRecognizer *swipeL = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft)];
+    UISwipeGestureRecognizer *swipeR = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight)];
+    swipeL.direction = UISwipeGestureRecognizerDirectionLeft;
+    swipeR.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swipeL];
+    [self.view addGestureRecognizer:swipeR];
+}
+- (void) swipeLeft {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.3;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromRight;
+    [self.view.window.layer addAnimation:transition forKey:nil];
+}
+- (void) swipeRight {
+    NSInteger last = [[self.navigationController viewControllers] indexOfObject:self];
+    [self.navigationController popToViewController:[[self.navigationController viewControllers]objectAtIndex:last - 1] animated:YES];
 }
 - (void) bDragMove:(id)sender withEvent:(UIEvent*)event {
     [self.trackTimer invalidate];
@@ -121,5 +149,9 @@
 }
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+}
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    //[self dismissModalViewControllerAnimated:NO];
 }
 @end

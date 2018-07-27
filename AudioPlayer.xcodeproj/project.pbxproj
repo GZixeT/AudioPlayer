@@ -240,14 +240,14 @@
 			path = STCell;
 			sourceTree = "<group>";
 		};
-		863880432100DA79009F8A66 /* VCFileManager */ = {
+		863880432100DA79009F8A66 /* VCSongs */ = {
 			isa = PBXGroup;
 			children = (
 				8616D58C210748C800AC40FE /* STCell */,
 				863880442100DA9B009F8A66 /* VCSongs.h */,
 				863880452100DA9B009F8A66 /* VCSongs.m */,
 			);
-			path = VCFileManager;
+			path = VCSongs;
 			sourceTree = "<group>";
 		};
 		863880472100DB00009F8A66 /* FileManager */ = {
@@ -280,6 +280,7 @@
 		864AD378210A263A0050A933 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				86BF31BC2105CC0500522FB4 /* AppManager */,
 				864AD37F210A2D0E0050A933 /* LandscapeManager */,
 				869829882100CB9C00934B9F /* AlertManager */,
 				8698297B2100A07100934B9F /* AudioManager */,
@@ -352,7 +353,7 @@
 				864AD37B210A29630050A933 /* VCLamscape */,
 				8616D584210736AB00AC40FE /* VCRecords */,
 				86BF31C721061A3600522FB4 /* VCMenu */,
-				863880432100DA79009F8A66 /* VCFileManager */,
+				863880432100DA79009F8A66 /* VCSongs */,
 				869829802100B6EF00934B9F /* VCAudioPlayer */,
 				869829812100B6FA00934B9F /* VCAudioRecorder */,
 			);
@@ -408,7 +409,6 @@
 			isa = PBXGroup;
 			children = (
 				864AD374210A05400050A933 /* RLMRecords */,
-				86BF31BC2105CC0500522FB4 /* AppManager */,
 				86BF31C12105CFEB00522FB4 /* RLMFolder */,
 			);
 			path = Realm;

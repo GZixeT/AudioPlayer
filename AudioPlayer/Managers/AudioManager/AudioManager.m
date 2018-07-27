@@ -64,13 +64,17 @@
 + (void) setSessionCategoryForRecordAndPlayWithError:(NSError**)outError {
     NSError *sessionError = nil;
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&sessionError];
-    [self standartError:&*outError error:sessionError avtype:@"setCategory AudioSession"];
+    if(![audioSession.category isEqualToString:AVAudioSessionCategoryPlayAndRecord]){
+        [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:&sessionError];
+        [self standartError:&*outError error:sessionError avtype:@"setCategory AudioSession"];
+    }
 }
 + (void) setSessionCategoryForMultiRouteWithError:(NSError**)outError {
     NSError *sessionError = nil;
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    [audioSession setCategory:AVAudioSessionCategoryPlayback error:&sessionError];
-    [self standartError:&*outError error:sessionError avtype:@"setCategory AudioSession"];
+    if(![audioSession.category isEqualToString:AVAudioSessionCategoryPlayback]){
+        [audioSession setCategory:AVAudioSessionCategoryPlayback error:&sessionError];
+        [self standartError:&*outError error:sessionError avtype:@"setCategory AudioSession"];
+    }
 }
 @end
