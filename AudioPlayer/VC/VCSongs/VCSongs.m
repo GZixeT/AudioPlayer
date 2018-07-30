@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     MPMediaQuery *mediaQuery = [MPMediaQuery songsQuery];
-    self.navigationItem.title = @"Список песен";
+    self.navigationItem.title = @"Список композиций";
     self.songs = mediaQuery.items;
     self.tableSongs.dataSource = self;
     self.tableSongs.delegate = self;

@@ -5,7 +5,7 @@
 //  Created by Георгий Зубков on 26/07/2018.
 //  Copyright © 2018 Георгий Зубков. All rights reserved.
 //
-#import "VCLanscape.h"
+#import "VCLandscape.h"
 #import <UIKit/UIKit.h>
 
 @interface LandscapeManager : NSObject

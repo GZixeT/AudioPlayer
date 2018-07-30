@@ -14,12 +14,12 @@
 }
 + (void) toLandscapeVC:(UIViewController*)vc {
     if(![self isPortraitOrientation]) {
-        if([vc isKindOfClass:[VCLanscape class]])return;
+        if([vc isKindOfClass:[VCLandscape class]])return;
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        VCLanscape *landscape = [storyboard instantiateViewControllerWithIdentifier:@"VCLandscape"];
+        VCLandscape *landscape = [storyboard instantiateViewControllerWithIdentifier:@"VCLandscape"];
         [vc.navigationController pushViewController:landscape animated:YES];
     } else {
-        if([vc isKindOfClass:[VCLanscape class]]) {
+        if([vc isKindOfClass:[VCLandscape class]]) {
             NSInteger index = [[vc.navigationController viewControllers] indexOfObject:vc];
             [vc.navigationController popToViewController:[[vc.navigationController viewControllers] objectAtIndex:index -1] animated:YES];
         }

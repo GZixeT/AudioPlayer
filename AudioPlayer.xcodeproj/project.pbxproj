@@ -22,9 +22,10 @@
 		8638804A2100DB17009F8A66 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 863880492100DB17009F8A66 /* FileManager.m */; };
 		864AD3732109DA890050A933 /* AnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 864AD3722109DA890050A933 /* AnimationManager.m */; };
 		864AD377210A05620050A933 /* RLMRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 864AD376210A05620050A933 /* RLMRecords.m */; };
-		864AD37E210A29820050A933 /* VCLanscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 864AD37D210A29820050A933 /* VCLanscape.m */; };
 		864AD382210A2D310050A933 /* LandscapeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 864AD381210A2D310050A933 /* LandscapeManager.m */; };
 		8652C2DE21085A6C00B5D399 /* TimeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8652C2DD21085A6C00B5D399 /* TimeManager.m */; };
+		868BF058210F068700D81FA7 /* VCLandscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 868BF057210F068700D81FA7 /* VCLandscape.m */; };
+		868BF05C210F122E00D81FA7 /* CVSCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 868BF05B210F122E00D81FA7 /* CVSCell.m */; };
 		8698297E2100A08900934B9F /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8698297D2100A08900934B9F /* AudioManager.m */; };
 		869829872100B74A00934B9F /* VCAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 869829862100B74A00934B9F /* VCAudioRecorder.m */; };
 		8698298C2100CBF900934B9F /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8698298B2100CBF900934B9F /* AlertManager.m */; };
@@ -91,12 +92,14 @@
 		864AD3722109DA890050A933 /* AnimationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnimationManager.m; sourceTree = "<group>"; };
 		864AD375210A05620050A933 /* RLMRecords.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RLMRecords.h; sourceTree = "<group>"; };
 		864AD376210A05620050A933 /* RLMRecords.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RLMRecords.m; sourceTree = "<group>"; };
-		864AD37C210A29820050A933 /* VCLanscape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCLanscape.h; sourceTree = "<group>"; };
-		864AD37D210A29820050A933 /* VCLanscape.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCLanscape.m; sourceTree = "<group>"; };
 		864AD380210A2D310050A933 /* LandscapeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LandscapeManager.h; sourceTree = "<group>"; };
 		864AD381210A2D310050A933 /* LandscapeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LandscapeManager.m; sourceTree = "<group>"; };
 		8652C2DC21085A6C00B5D399 /* TimeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimeManager.h; sourceTree = "<group>"; };
 		8652C2DD21085A6C00B5D399 /* TimeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeManager.m; sourceTree = "<group>"; };
+		868BF056210F068700D81FA7 /* VCLandscape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCLandscape.h; sourceTree = "<group>"; };
+		868BF057210F068700D81FA7 /* VCLandscape.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VCLandscape.m; sourceTree = "<group>"; };
+		868BF05A210F122E00D81FA7 /* CVSCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVSCell.h; sourceTree = "<group>"; };
+		868BF05B210F122E00D81FA7 /* CVSCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CVSCell.m; sourceTree = "<group>"; };
 		8698297C2100A08900934B9F /* AudioManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		8698297D2100A08900934B9F /* AudioManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
 		869829852100B74A00934B9F /* VCAudioRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VCAudioRecorder.h; sourceTree = "<group>"; };
@@ -311,13 +314,14 @@
 			path = Dop;
 			sourceTree = "<group>";
 		};
-		864AD37B210A29630050A933 /* VCLamscape */ = {
+		864AD37B210A29630050A933 /* VCLandscape */ = {
 			isa = PBXGroup;
 			children = (
-				864AD37C210A29820050A933 /* VCLanscape.h */,
-				864AD37D210A29820050A933 /* VCLanscape.m */,
+				868BF059210F120E00D81FA7 /* CVSCell */,
+				868BF056210F068700D81FA7 /* VCLandscape.h */,
+				868BF057210F068700D81FA7 /* VCLandscape.m */,
 			);
-			path = VCLamscape;
+			path = VCLandscape;
 			sourceTree = "<group>";
 		};
 		864AD37F210A2D0E0050A933 /* LandscapeManager */ = {
@@ -338,6 +342,15 @@
 			path = TimeManager;
 			sourceTree = "<group>";
 		};
+		868BF059210F120E00D81FA7 /* CVSCell */ = {
+			isa = PBXGroup;
+			children = (
+				868BF05A210F122E00D81FA7 /* CVSCell.h */,
+				868BF05B210F122E00D81FA7 /* CVSCell.m */,
+			);
+			path = CVSCell;
+			sourceTree = "<group>";
+		};
 		8698297B2100A07100934B9F /* AudioManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -350,7 +363,7 @@
 		8698297F2100B6DB00934B9F /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				864AD37B210A29630050A933 /* VCLamscape */,
+				864AD37B210A29630050A933 /* VCLandscape */,
 				8616D584210736AB00AC40FE /* VCRecords */,
 				86BF31C721061A3600522FB4 /* VCMenu */,
 				863880432100DA79009F8A66 /* VCSongs */,
@@ -642,11 +655,11 @@
 				869829872100B74A00934B9F /* VCAudioRecorder.m in Sources */,
 				86BF31CA21061A5000522FB4 /* VCMenu.m in Sources */,
 				8652C2DE21085A6C00B5D399 /* TimeManager.m in Sources */,
+				868BF058210F068700D81FA7 /* VCLandscape.m in Sources */,
 				860D6BDF210080DA00D05F7F /* VCAudioPlayer.m in Sources */,
 				863880462100DA9B009F8A66 /* VCSongs.m in Sources */,
 				869959CF2102095D0062029F /* AudioPlayer.m in Sources */,
 				8638804A2100DB17009F8A66 /* FileManager.m in Sources */,
-				864AD37E210A29820050A933 /* VCLanscape.m in Sources */,
 				8698298C2100CBF900934B9F /* AlertManager.m in Sources */,
 				860D6BBB210080AA00D05F7F /* main.m in Sources */,
 				864AD382210A2D310050A933 /* LandscapeManager.m in Sources */,
@@ -658,6 +671,7 @@
 				86BF31C42105D02600522FB4 /* RLMFolder.m in Sources */,
 				8616D587210736C100AC40FE /* VCRecords.m in Sources */,
 				86BF31BF2105CC2800522FB4 /* AppManager.m in Sources */,
+				868BF05C210F122E00D81FA7 /* CVSCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
