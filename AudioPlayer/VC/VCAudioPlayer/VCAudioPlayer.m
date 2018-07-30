@@ -16,6 +16,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 @interface VCAudioPlayer () <UIGestureRecognizerDelegate, AVAudioPlayerDelegate>
+@property (weak, nonatomic) IBOutlet UIImageView *ivBlur;
 @property (weak, nonatomic) IBOutlet UIButton *bPlace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bProgressWidthConstraint;
 @property TimeManager *timeManager;
@@ -83,6 +84,7 @@
     }
     if(self.audioPlayer.artwork){
         [self.artworkImageView setImage:self.audioPlayer.artwork];
+        [self.ivBlur setImage:self.audioPlayer.artwork];
     } else {
         self.artworkImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self.artworkImageView setImage:[UIImage imageNamed:@"musical-note"]];
@@ -91,6 +93,10 @@
     if(self.audioPlayer.artist)
         self.lbArtistAndSong.text = [NSString stringWithFormat:@"%@ - %@",self.audioPlayer.artist, self.audioPlayer.title];
     else self.lbArtistAndSong.text = [NSString stringWithFormat:@"%@ - %@",@"Неизвестный исполнитель", self.audioPlayer.title];
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:(UIBlurEffectStyleLight)];
+    UIVisualEffectView *visual = [[UIVisualEffectView alloc]initWithEffect:blur];
+    visual.frame = self.view.bounds;
+    [self.ivBlur addSubview:visual];
 }
 - (void) initProgressEvents {
     [self.bPlace addTarget:self action:@selector(setTimeAfterDrag:withEvent:) forControlEvents:UIControlEventTouchUpInside];
@@ -152,9 +158,6 @@
     float multiplier = ([self.audioPlayer.audioPlayer currentTime]/[self.audioPlayer.audioPlayer duration]) * self.bPlace.frame.size.width;
     [AnimationManager constraintMoveAnimationWithView:self.bPlace constraint:self.bProgressWidthConstraint duration:0 constraintPosition:multiplier];
     [self setTime];
-    if(!self.audioPlayer.audioPlayer.isPlaying && self.trackTimer) {
-        
-    }
 }
 - (void) setTime {
     self.lbTimeLeft.text = [self.timeManager dateFormatSecondsToMinutes:[self.audioPlayer.audioPlayer currentTime]];
