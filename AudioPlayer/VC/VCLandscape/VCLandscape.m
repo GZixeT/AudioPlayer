@@ -26,7 +26,7 @@
     [super viewDidLoad];
     self.navigationItem.title = @"Список композиций";
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:(UIBarButtonItemStylePlain) target:nil action:nil];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:(UIBarButtonItemStylePlain) target:nil action:@selector(playingButton)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:(UIBarButtonItemStylePlain) target:self action:@selector(playingButton)];
     self.cvSongs.delegate = self;
     self.cvSongs.dataSource = self;
     self.cellSize = self.cvSongs.frame.size.height/1.5;
@@ -34,7 +34,6 @@
     if([AudioPlayer sharedInstance].audioPlayer.isPlaying)
         self.navigationItem.rightBarButtonItem.title = @"Stop";
     [AudioManager setSessionCategoryForMultiRouteWithError:nil];
-    // Do any additional setup after loading the view.
 }
 - (void) playingButton {
     if([AudioPlayer sharedInstance].audioPlayer.isPlaying){
@@ -62,6 +61,8 @@
 }
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    NSIndexPath *path = [NSIndexPath indexPathForItem:[AudioPlayer sharedInstance].playlistPosition inSection:0];
+    [self.cvSongs scrollToItemAtIndexPath:path atScrollPosition:(UICollectionViewScrollPositionCenteredHorizontally) animated:YES];
 }
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     float top = (self.cvSongs.frame.size.height - self.cellSize)/2;
@@ -103,6 +104,8 @@
         [AudioPlayer sharedInstance].artwork = [item.artwork imageWithSize:item.artwork.imageCropRect.size];
         [AudioPlayer sharedInstance].title = item.title;
         [AudioPlayer sharedInstance].artist = item.artist;
+        [AudioPlayer sharedInstance].playlistPosition = indexPath.item;
+        [AudioPlayer sharedInstance].playType = PlayTypeAll;
         [[AudioPlayer sharedInstance].audioPlayer play];
     }
 }

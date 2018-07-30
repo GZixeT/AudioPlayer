@@ -20,6 +20,7 @@
 
 @interface VCSongs () <UITableViewDelegate, UITableViewDataSource, STCellDelegate>
 @property NSArray *songs;
+@property BOOL isLockLandscape;
 @end
 
 @implementation VCSongs
@@ -57,7 +58,7 @@
 - (void) goToViewController {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     VCAudioPlayer *audioPlayer = [storyboard instantiateViewControllerWithIdentifier:@"AudioPlayer"];
-    audioPlayer.playType = PlayTypeAll;
+    [AudioPlayer sharedInstance].playType = PlayTypeAll;
     [self.navigationController pushViewController:audioPlayer animated:YES];
 }
 - (void)didReceiveMemoryWarning {
@@ -68,6 +69,10 @@
     [super viewWillAppear:animated];
     [self.tableSongs reloadData];
 }
+- (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.isLockLandscape = YES;
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return NUMBER_OF_SECTIONS;
 }
@@ -77,7 +82,8 @@
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context){
-        [LandscapeManager toLandscapeVC:self];
+        if(!self.isLockLandscape)
+            [LandscapeManager toLandscapeVC:self];
     }completion:^(id<UIViewControllerTransitionCoordinatorContext> context){
     }];
 }

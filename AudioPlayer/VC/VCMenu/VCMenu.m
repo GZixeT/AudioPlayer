@@ -54,7 +54,7 @@
     if([AudioPlayer sharedInstance].audioPlayer) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         VCAudioPlayer *player = [storyboard instantiateViewControllerWithIdentifier:@"AudioPlayer"];
-        player.playType = PlayTypeAll;
+        [AudioPlayer sharedInstance].playType = PlayTypeAll;
         [self.navigationController pushViewController:player animated:YES];
     } else [self goToVCSongs];
 }
